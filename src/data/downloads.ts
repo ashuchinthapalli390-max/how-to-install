@@ -81,7 +81,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '2b31f2dbf011e6e5b3a7a7dc11bb124ed0bb831bab745bf971927a8c1da5e1ef',
     minOs: 'Android 8.0 (API 26) or higher',
     status: 'verified',
-    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-Android-Release.zip',
+    downloadUrl: '/downloads/ChatXa-Android-Release.zip',
     directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\install\\public\\downloads\\ChatXa-Android-Release.zip',
     releaseNotes: [
       '★ RECOMMENDED FOR MOBILE: Optimized compressed package with 70% data savings (165 MB vs 550 MB).',
@@ -103,7 +103,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '92637def761092a58373fd26ae9d4bfdeab391bdabf9198b96d138bd2af1fb05',
     minOs: 'Android 8.0 (API 26) or higher',
     status: 'verified',
-    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-Android-Release.apk',
+    downloadUrl: '/downloads/ChatXa-Android-Release.apk',
     directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\app_store\\ChatXa-Android-Release.apk',
     releaseNotes: [
       'Direct uncompressed standalone APK ready for immediate one-tap installation.',
@@ -124,7 +124,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '4b9bc55c535381be022bd3540c09f1b4a4eda375dd8e5ab2bdec6812b9e51362',
     minOs: 'iOS 13.0 or higher (iPhone & iPod touch)',
     status: 'verified',
-    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-iOS-Release.ipa',
+    downloadUrl: '/downloads/ChatXa-iOS-Release.ipa',
     directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\app_store\\ChatXa-iOS-Release.ipa',
     releaseNotes: [
       'Bundle Identifier: com.chatxa.chatxa',
@@ -146,7 +146,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '0b07c6f74d7e2dde7b9d73d29ffb38a4054a81c1fd81852a530c8c1e5eed1f2d',
     minOs: 'Universal cross-platform archive',
     status: 'verified',
-    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-App-Store.zip',
+    downloadUrl: '/downloads/ChatXa-App-Store.zip',
     directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\App Store.zip',
     releaseNotes: [
       'Master distribution bundle containing both verified release binaries and all technical guides.',

@@ -171,7 +171,7 @@ export const HomePage: React.FC = () => {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <a
-                href="https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-Android-Release.zip"
+                href="/downloads/ChatXa-Android-Release.zip"
                 download="ChatXa-Android-Release.zip"
                 className="button full"
                 style={{ margin: 0, justifyContent: 'center' }}
@@ -181,7 +181,7 @@ export const HomePage: React.FC = () => {
               </a>
 
               <a
-                href="https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-Android-Release.apk"
+                href="/downloads/ChatXa-Android-Release.apk"
                 download="ChatXa-Android-Release.apk"
                 className="button secondary sm full"
                 style={{ margin: 0, justifyContent: 'center', fontSize: 11 }}
@@ -252,7 +252,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             <a
-              href="https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-iOS-Release.ipa"
+              href="/downloads/ChatXa-iOS-Release.ipa"
               download="ChatXa-iOS-Release.ipa"
               className="button full"
               style={{ margin: 0, justifyContent: 'center' }}
