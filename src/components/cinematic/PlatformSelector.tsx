@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import { useRouter } from '../../context/RouterContext';
 import type { PlatformId } from '../../types';
 import { PLATFORMS_DATA } from '../../data/platforms';
-import { Smartphone, Apple, Monitor, Laptop, Terminal, ArrowRight } from 'lucide-react';
+import {
+  Smartphone,
+  Apple,
+  Monitor,
+  Laptop,
+  Terminal,
+  ArrowRight,
+  Download,
+  ShieldCheck
+} from 'lucide-react';
 
 export const PlatformSelector: React.FC = () => {
   const { navigate } = useRouter();
@@ -10,12 +19,12 @@ export const PlatformSelector: React.FC = () => {
 
   const currentPlatform = PLATFORMS_DATA[selectedPlatform];
 
-  const platformsList: Array<{ id: PlatformId; name: string; icon: React.ReactNode }> = [
-    { id: 'android', name: 'Android', icon: <Smartphone size={18} /> },
-    { id: 'ios', name: 'iPhone (iOS)', icon: <Apple size={18} /> },
-    { id: 'windows', name: 'Windows', icon: <Monitor size={18} /> },
-    { id: 'macos', name: 'macOS', icon: <Laptop size={18} /> },
-    { id: 'linux', name: 'Linux', icon: <Terminal size={18} /> }
+  const platformsList: Array<{ id: PlatformId; name: string; tag: string; icon: React.ReactNode }> = [
+    { id: 'android', name: 'Android', tag: 'APK / ADB', icon: <Smartphone size={16} /> },
+    { id: 'ios', name: 'iPhone / iOS', tag: 'IPA / Sideload', icon: <Apple size={16} /> },
+    { id: 'windows', name: 'Windows', tag: 'Native x64', icon: <Monitor size={16} /> },
+    { id: 'macos', name: 'macOS', tag: 'Cocoa / ARM', icon: <Laptop size={16} /> },
+    { id: 'linux', name: 'Linux', tag: 'GTK3 / Waydroid', icon: <Terminal size={16} /> }
   ];
 
   const getPlatformArtwork = (id: PlatformId) => {
@@ -36,213 +45,316 @@ export const PlatformSelector: React.FC = () => {
   };
 
   return (
-    <section id="platform-selector" style={{ position: 'relative', padding: '60px 0 100px', zIndex: 2 }}>
-      <div className="container">
-        {/* Floating Capsule Bar */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 48 }}>
+    <section id="platforms" className="section" style={{ position: 'relative' }}>
+      {/* Section Eyebrow & Numbered Editorial Header */}
+      <div className="section-heading" style={{ marginBottom: 40 }}>
+        <div>
+          <div className="eyebrow">
+            <span className="live-dot" />
+            <span>01 / CHOOSE YOUR PLATFORM</span>
+          </div>
+          <h2
+            style={{
+              fontFamily: 'var(--heading)',
+              fontSize: 'clamp(36px, 4.4vw, 64px)',
+              lineHeight: 1.08,
+              letterSpacing: '-0.05em'
+            }}
+          >
+            FIVE DEVICES. <br />
+            <em>ONE EXPERIENCE.</em>
+          </h2>
+        </div>
+        <p
+          className="large-copy"
+          style={{ maxWidth: 480, margin: 0, fontSize: 15, color: 'var(--muted)' }}
+        >
+          Explore dedicated installation journeys tailored to each ecosystem. Every platform features verified packages, direct sideloading methods, and step-by-step guidance.
+        </p>
+      </div>
+
+      {/* Platform Selector Tabs */}
+      <div
+        style={{
+          display: 'flex',
+          gap: 12,
+          borderBottom: '1px solid var(--line)',
+          paddingBottom: 20,
+          marginBottom: 44,
+          overflowX: 'auto'
+        }}
+      >
+        {platformsList.map((p) => {
+          const isActive = selectedPlatform === p.id;
+          return (
+            <button
+              key={p.id}
+              onClick={() => setSelectedPlatform(p.id)}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 12,
+                padding: '12px 20px',
+                borderRadius: 'var(--radius)',
+                backgroundColor: isActive ? 'var(--surface)' : 'transparent',
+                border: `1px solid ${isActive ? 'var(--accent)' : 'var(--line)'}`,
+                color: isActive ? 'var(--text)' : 'var(--muted)',
+                fontFamily: 'var(--heading)',
+                fontSize: 13,
+                fontWeight: 650,
+                whiteSpace: 'nowrap',
+                transition: 'all var(--transition-fast)'
+              }}
+            >
+              <span style={{ color: isActive ? 'var(--accent)' : 'inherit' }}>
+                {p.icon}
+              </span>
+              <span>{p.name}</span>
+              <span
+                style={{
+                  fontFamily: 'var(--mono)',
+                  fontSize: 9,
+                  padding: '2px 6px',
+                  borderRadius: 3,
+                  backgroundColor: isActive ? 'color-mix(in srgb, var(--accent), transparent 85%)' : 'var(--raised)',
+                  color: isActive ? 'var(--accent)' : 'var(--muted)'
+                }}
+              >
+                {p.tag}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Selected Platform Curated Editorial Showcase */}
+      <div
+        className="surface-card"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1.05fr 1.15fr',
+          gap: 50,
+          alignItems: 'center',
+          padding: '44px 40px',
+          border: '1px solid var(--line)',
+          borderRadius: 'var(--radius)'
+        }}
+      >
+        {/* Left: Device Visual Showcase */}
+        <div style={{ position: 'relative' }}>
           <div
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 8,
-              padding: '6px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: 'var(--bg-elevated)',
-              border: '1px solid var(--border-strong)',
-              boxShadow: '0 20px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--accent-subtle)',
-              maxWidth: '100%',
-              overflowX: 'auto'
+              borderRadius: 'var(--radius)',
+              overflow: 'hidden',
+              border: '1px solid var(--line)',
+              aspectRatio: '16/11',
+              backgroundColor: 'var(--raised)',
+              position: 'relative'
             }}
-            className="capsule-bar"
           >
-            {platformsList.map((p) => {
-              const isActive = selectedPlatform === p.id;
-              return (
-                <button
-                  key={p.id}
-                  onClick={() => setSelectedPlatform(p.id)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 8,
-                    padding: '10px 20px',
-                    borderRadius: 'var(--radius-full)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontFamily: 'var(--font-ui)',
-                    fontSize: 14,
-                    fontWeight: 600,
-                    whiteSpace: 'nowrap',
-                    backgroundColor: isActive ? 'var(--accent-bright)' : 'transparent',
-                    color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
-                    boxShadow: isActive ? '0 4px 15px var(--accent-glow)' : 'none',
-                    transition: 'all var(--transition-normal)'
-                  }}
-                >
-                  <span style={{ color: isActive ? '#FFFFFF' : 'var(--accent-bright)' }}>{p.icon}</span>
-                  <span>{p.name}</span>
-                </button>
-              );
-            })}
+            <img
+              src={getPlatformArtwork(currentPlatform.id)}
+              alt={`${currentPlatform.name} Installation Showcase`}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+
+            {/* Platform Tag Badge Overlay */}
+            <div
+              style={{
+                position: 'absolute',
+                top: 14,
+                left: 14,
+                padding: '6px 12px',
+                borderRadius: 4,
+                backgroundColor: 'var(--accent)',
+                color: 'var(--on-accent)',
+                fontFamily: 'var(--heading)',
+                fontSize: 10,
+                fontWeight: 700,
+                letterSpacing: '0.08em'
+              }}
+            >
+              {currentPlatform.name.toUpperCase()} CORE
+            </div>
+
+            {/* Release Status Overlay */}
+            {currentPlatform.releaseFileName && (
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 14,
+                  left: 14,
+                  right: 14,
+                  padding: '10px 14px',
+                  borderRadius: 4,
+                  backgroundColor: 'color-mix(in srgb, var(--surface), transparent 10%)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid var(--line)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  fontSize: 11,
+                  fontFamily: 'var(--mono)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <ShieldCheck size={14} style={{ color: 'var(--accent)' }} />
+                  <span>{currentPlatform.releaseFileName}</span>
+                </div>
+                <span style={{ color: 'var(--accent)' }}>{currentPlatform.releaseFileSize}</span>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Selected Platform Showcase Chapter */}
-        <div
-          className="surface-card"
-          style={{
-            padding: '40px',
-            border: '1px solid var(--border-highlight)',
-            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.7)',
-            display: 'grid',
-            gridTemplateColumns: '1.2fr 1fr',
-            gap: 48,
-            alignItems: 'center'
-          }}
-        >
-          {/* Left Details */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span className="badge badge-accent">
-                {currentPlatform.label}
-              </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)' }}>
-                {currentPlatform.methods.length} Installation Methods Available
+        {/* Right: Platform Details & Installation Methods */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div>
+            <div className="eyebrow" style={{ marginBottom: 10 }}>
+              <span>{currentPlatform.label}</span>
+              <span>•</span>
+              <span style={{ color: 'var(--accent)' }}>
+                {currentPlatform.methods.length} INSTALLATION PATHS
               </span>
             </div>
 
             <h3
-              className="font-display"
               style={{
-                fontSize: 'clamp(28px, 3.5vw, 42px)',
-                lineHeight: 1.15,
-                fontWeight: 700
+                fontFamily: 'var(--heading)',
+                fontSize: 'clamp(28px, 3.2vw, 40px)',
+                fontWeight: 650,
+                letterSpacing: '-0.04em',
+                marginBottom: 14
               }}
             >
               {currentPlatform.title}
             </h3>
 
-            <p style={{ color: 'var(--text-secondary)', fontSize: 16, lineHeight: 1.7 }}>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--muted)', margin: 0 }}>
               {currentPlatform.description}
             </p>
+          </div>
 
-            {/* Methods Preview */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <span style={{ fontFamily: 'var(--font-ui)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)' }}>
-                Supported Methods for {currentPlatform.name}:
-              </span>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12 }}>
-                {currentPlatform.methods.map((method) => (
-                  <div
-                    key={method.id}
-                    onClick={() => navigate(`/install/${currentPlatform.id}?method=${method.id}`)}
-                    style={{
-                      padding: '12px 16px',
-                      borderRadius: 'var(--radius-md)',
-                      backgroundColor: 'var(--bg-surface)',
-                      border: '1px solid var(--border-muted)',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: 4,
-                      transition: 'all var(--transition-fast)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--accent-bright)';
-                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--border-muted)';
-                      e.currentTarget.style.backgroundColor = 'var(--bg-surface)';
-                    }}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <span style={{ fontFamily: 'var(--font-ui)', fontWeight: 600, fontSize: 13, color: 'var(--text-primary)' }}>
-                        {method.name}
-                      </span>
-                      <ArrowRight size={13} style={{ color: 'var(--accent-text)' }} />
-                    </div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
-                      ⏱ {method.estimatedTime} • {method.difficulty}
+          {/* Installation Methods List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <span
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: 10,
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                color: 'var(--muted)'
+              }}
+            >
+              AVAILABLE INSTALLATION METHODS:
+            </span>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 10 }}>
+              {currentPlatform.methods.map((method) => (
+                <div
+                  key={method.id}
+                  onClick={() => navigate(`/install/${currentPlatform.id}?method=${method.id}`)}
+                  style={{
+                    padding: '12px 14px',
+                    borderRadius: 'var(--radius)',
+                    backgroundColor: 'var(--raised)',
+                    border: '1px solid var(--line)',
+                    cursor: 'pointer',
+                    transition: 'border-color var(--transition-fast), transform var(--transition-fast)'
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--line)';
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 4 }}>
+                    <span style={{ fontFamily: 'var(--heading)', fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>
+                      {method.name}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: 9,
+                        fontFamily: 'var(--mono)',
+                        padding: '1px 5px',
+                        borderRadius: 3,
+                        backgroundColor: 'var(--surface)',
+                        color: method.difficulty === 'Beginner' ? 'var(--accent)' : 'var(--muted)'
+                      }}
+                    >
+                      {method.difficulty}
                     </span>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* CTA to open full interactive guide */}
-            <div style={{ display: 'flex', gap: 16, marginTop: 12 }}>
-              <button
-                onClick={() => navigate(`/install/${currentPlatform.id}`)}
-                className="btn btn-primary"
-              >
-                Launch {currentPlatform.name} Master Guide
-                <ArrowRight size={16} />
-              </button>
-
-              <button
-                onClick={() => navigate('/download')}
-                className="btn btn-outline"
-              >
-                View Release Checksums
-              </button>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', lineHeight: 1.4 }}>
+                    {method.subtitle}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right Preview Card */}
+          {/* System Requirements Preview */}
           <div
             style={{
-              position: 'relative',
-              borderRadius: 'var(--radius-lg)',
-              overflow: 'hidden',
-              border: '1px solid var(--border-muted)',
-              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8)',
-              backgroundColor: 'var(--bg-primary)'
+              padding: '14px 18px',
+              borderRadius: 'var(--radius)',
+              backgroundColor: 'color-mix(in srgb, var(--surface), var(--bg) 50%)',
+              border: '1px solid var(--line)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 8,
+              fontSize: 11
             }}
           >
-            <img
-              src={getPlatformArtwork(selectedPlatform)}
-              alt={`${currentPlatform.name} Experience`}
-              style={{
-                width: '100%',
-                height: 380,
-                objectFit: 'cover',
-                display: 'block'
-              }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: '16px 20px',
-                background: 'linear-gradient(to top, rgba(8, 9, 11, 0.95) 40%, transparent 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}
-            >
-              <div>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--accent-text)' }}>
-                  PACKAGE TARGET
-                </span>
-                <div style={{ fontFamily: 'var(--font-ui)', fontWeight: 700, fontSize: 14, color: '#FFFFFF' }}>
-                  {currentPlatform.releaseFileName || 'Release Bundle'}
-                </div>
-              </div>
-              <span className="badge" style={{ backgroundColor: 'rgba(255,255,255,0.1)', color: '#FFFFFF' }}>
-                {currentPlatform.releaseFileSize || 'VERIFIED'}
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--muted)' }}>
+              <span>SUPPORTED OS</span>
+              <span style={{ color: 'var(--text)', fontWeight: 500 }}>
+                {currentPlatform.systemRequirements[0]?.value || 'Latest verified'}
               </span>
             </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--muted)' }}>
+              <span>ARCHITECTURE</span>
+              <span style={{ color: 'var(--text)', fontWeight: 500 }}>
+                {currentPlatform.systemRequirements[1]?.value || '64-bit'}
+              </span>
+            </div>
+          </div>
+
+          {/* Action Row */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginTop: 4 }}>
+            <button
+              onClick={() => navigate(`/install/${currentPlatform.id}`)}
+              className="button"
+            >
+              Open {currentPlatform.name} Guide
+              <ArrowRight size={15} />
+            </button>
+
+            {currentPlatform.releaseFileName && (
+              <button
+                onClick={() => navigate('/download')}
+                className="button secondary"
+              >
+                Download Package
+                <Download size={14} />
+              </button>
+            )}
           </div>
         </div>
       </div>
 
       <style>{`
         @media (max-width: 900px) {
-          .surface-card {
+          #platforms .surface-card {
             grid-template-columns: 1fr !important;
+            gap: 32px !important;
             padding: 24px !important;
           }
         }

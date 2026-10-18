@@ -1,173 +1,231 @@
 import React from 'react';
 import { useRouter } from '../../context/RouterContext';
-import { useTheme } from '../../context/ThemeContext';
-import { Smartphone, Apple, Monitor, Laptop, Terminal, Shield } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const { navigate } = useRouter();
-  const { theme } = useTheme();
 
   return (
     <footer
+      className="footer"
       style={{
-        backgroundColor: 'var(--bg-surface)',
-        borderTop: '1px solid var(--border-muted)',
-        marginTop: 100,
-        padding: '80px 0 40px',
+        borderTop: '1px solid var(--line)',
+        backgroundColor: 'var(--bg)',
+        padding: '80px 5% 30px',
+        marginTop: 60,
         position: 'relative'
       }}
-      className="crimson-horizon"
     >
-      <div className="container">
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: 48,
-            marginBottom: 60
-          }}
-        >
-          {/* Brand Column */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span style={{ fontFamily: 'var(--font-ui)', fontWeight: 800, fontSize: 22, color: 'var(--text-primary)' }}>
-                Chat<span style={{ color: 'var(--accent-text)' }}>Xa</span>
-              </span>
-              <span className="badge badge-accent">v4.0.0</span>
+      {/* Editorial Closing Statement Banner */}
+      <div
+        style={{
+          borderBottom: '1px solid var(--line)',
+          paddingBottom: 60,
+          marginBottom: 60,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          flexWrap: 'wrap',
+          gap: 32
+        }}
+      >
+        <div>
+          <div className="eyebrow" style={{ marginBottom: 16 }}>
+            <span className="live-dot" />
+            <span>THE UNIFIED COMMUNICATOR</span>
+          </div>
+          <h2
+            style={{
+              fontFamily: 'var(--heading)',
+              fontSize: 'clamp(40px, 5.5vw, 76px)',
+              lineHeight: 1.05,
+              letterSpacing: '-0.06em',
+              fontWeight: 650,
+              margin: 0
+            }}
+          >
+            EVERY SCREEN. <br />
+            <em>EVERY CONVERSATION.</em>
+          </h2>
+        </div>
+
+        <div style={{ maxWidth: 440 }}>
+          <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--muted)', marginBottom: 24 }}>
+            Experience seamless, real-time messaging, encrypted file exchange, and WebRTC low-latency calling natively configured on every device in your daily workflow.
+          </p>
+          <button
+            onClick={() => navigate('/download')}
+            className="button"
+          >
+            Download Verified Binaries
+            <ArrowRight size={15} />
+          </button>
+        </div>
+      </div>
+
+      {/* 4-Column Directory Layout */}
+      <div
+        className="footer-top"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1.2fr 1fr 1fr 1fr',
+          gap: 40,
+          marginBottom: 60
+        }}
+      >
+        {/* Col 1: Brand & Status */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+          <div className="logo" style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+            <div className="logo-symbol" aria-hidden="true">
+              <span />
+              <span />
+              <span />
             </div>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 14, lineHeight: 1.6, maxWidth: 300 }}>
-              Cinematic installation atlas for the next generation social and realtime communication experience.
-            </p>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: 8,
-                  height: 8,
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--success-color)',
-                  boxShadow: '0 0 8px var(--success-color)'
-                }}
-              />
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-secondary)' }}>
-                All Release Artifacts Verified
-              </span>
-            </div>
+            <span>ChatXa</span>
+            <span className="logo-period">.</span>
           </div>
 
-          {/* Platforms Column */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h4 style={{ fontFamily: 'var(--font-ui)', fontSize: 14, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)' }}>
-              Operating Systems
-            </h4>
-            {[
-              { name: 'Android Master Guide', path: '/install/android', icon: <Smartphone size={14} /> },
-              { name: 'iPhone (iOS) Master Guide', path: '/install/ios', icon: <Apple size={14} /> },
-              { name: 'Windows Desktop Guide', path: '/install/windows', icon: <Monitor size={14} /> },
-              { name: 'macOS Workstation Guide', path: '/install/macos', icon: <Laptop size={14} /> },
-              { name: 'Linux Terminal Guide', path: '/install/linux', icon: <Terminal size={14} /> }
-            ].map((p) => (
-              <span
-                key={p.path}
-                onClick={() => navigate(p.path)}
-                style={{
-                  color: 'var(--text-secondary)',
-                  fontSize: 14,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 8,
-                  transition: 'color var(--transition-fast)'
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-              >
-                <span style={{ opacity: 0.7 }}>{p.icon}</span>
-                {p.name}
-              </span>
-            ))}
-          </div>
+          <p style={{ fontSize: 13, lineHeight: 1.7, color: 'var(--muted)', maxWidth: 300, margin: 0 }}>
+            Cinematic installation atlas for ChatXa 4.0. Precision technical step-by-step guidance for Android, iPhone, Windows, macOS, and Linux.
+          </p>
 
-          {/* Documentation & Resources */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h4 style={{ fontFamily: 'var(--font-ui)', fontSize: 14, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)' }}>
-              Atlas Resources
-            </h4>
-            {[
-              { name: 'Verified Releases & Checksums', path: '/download' },
-              { name: 'Interactive Issue Solver', path: '/troubleshooting' },
-              { name: 'Frequently Asked Questions', path: '/faq' },
-              { name: 'Android Play Protect Guide', path: '/troubleshooting?q=play+protect' },
-              { name: 'iOS Developer Mode Setup', path: '/troubleshooting?q=developer+mode' },
-              { name: 'macOS Gatekeeper Resolution', path: '/troubleshooting?q=quarantine' }
-            ].map((r) => (
-              <span
-                key={r.name}
-                onClick={() => navigate(r.path)}
-                style={{
-                  color: 'var(--text-secondary)',
-                  fontSize: 14,
-                  cursor: 'pointer',
-                  transition: 'color var(--transition-fast)'
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-text)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
-              >
-                {r.name}
-              </span>
-            ))}
-          </div>
-
-          {/* Technical Policy */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <h4 style={{ fontFamily: 'var(--font-ui)', fontSize: 14, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)' }}>
-              Integrity & Trust
-            </h4>
-            <div style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-              <Shield size={16} style={{ color: 'var(--accent-bright)', marginTop: 2, flexShrink: 0 }} />
-              <p style={{ color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.5 }}>
-                No fake download counts or fabricated certificates. All commands, checksums, and package manifests reflect authentic build outputs.
-              </p>
-            </div>
-            <div style={{ marginTop: 12 }}>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
-                Active Theme: {theme.toUpperCase()}
-              </span>
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 4 }}>
+            <span className="live-dot" />
+            <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--text)' }}>
+              All 5 Platforms Operational
+            </span>
           </div>
         </div>
 
-        {/* Bottom Line */}
-        <div
-          style={{
-            borderTop: '1px solid var(--border-muted)',
-            paddingTop: 24,
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: 16
-          }}
-        >
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)' }}>
-            © 2026 ChatXa 4.0 — Powered by CreaXa Cinematic Architecture. All rights reserved.
-          </span>
-          <div style={{ display: 'flex', gap: 20 }}>
-            <span
-              onClick={() => navigate('/download')}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent-text)', cursor: 'pointer' }}
+        {/* Col 2: Operating Systems */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <span className="eyebrow" style={{ fontSize: 9 }}>OPERATING SYSTEMS</span>
+          {[
+            { name: 'Android APK / ADB', path: '/install/android' },
+            { name: 'iPhone iOS Sideloadly', path: '/install/ios' },
+            { name: 'Windows x64 Native', path: '/install/windows' },
+            { name: 'macOS Apple Silicon', path: '/install/macos' },
+            { name: 'Linux GTK & Waydroid', path: '/install/linux' }
+          ].map((item) => (
+            <a
+              key={item.path}
+              href={item.path}
+              onClick={(e) => { e.preventDefault(); navigate(item.path); }}
+              style={{ fontSize: 13, color: 'var(--muted)', transition: 'color var(--transition-fast)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
             >
-              Direct Releases (.apk / .ipa / .zip)
-            </span>
-            <span
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)', cursor: 'pointer' }}
+              {item.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Col 3: Atlas Documentation */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <span className="eyebrow" style={{ fontSize: 9 }}>ATLAS RESOURCES</span>
+          {[
+            { name: 'Verified Releases', path: '/download' },
+            { name: 'Troubleshooting Solver', path: '/troubleshooting' },
+            { name: 'Frequently Asked Questions', path: '/faq' },
+            { name: 'Play Protect Walkthrough', path: '/troubleshooting' },
+            { name: 'Gatekeeper Quarantine', path: '/troubleshooting' }
+          ].map((item) => (
+            <a
+              key={item.name}
+              href={item.path}
+              onClick={(e) => { e.preventDefault(); navigate(item.path); }}
+              style={{ fontSize: 13, color: 'var(--muted)', transition: 'color var(--transition-fast)' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--muted)')}
             >
-              Back to Top ↑
+              {item.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Col 4: Verification & Integrity */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <span className="eyebrow" style={{ fontSize: 9 }}>SECURITY & INTEGRITY</span>
+          <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.6 }}>
+            SHA-256 cryptographically verified builds with zero external telemetry and local data persistence.
+          </div>
+          <div style={{ marginTop: 8 }}>
+            <span
+              style={{
+                fontFamily: 'var(--mono)',
+                fontSize: 10,
+                padding: '4px 8px',
+                borderRadius: 4,
+                backgroundColor: 'var(--raised)',
+                border: '1px solid var(--line)',
+                color: 'var(--accent)'
+              }}
+            >
+              VERSION 4.0.0-RELEASE
             </span>
           </div>
         </div>
       </div>
+
+      {/* Giant CreaXa Typography Wordmark */}
+      <div
+        className="footer-wordmark"
+        style={{
+          fontFamily: 'var(--heading)',
+          fontSize: 'clamp(72px, 18vw, 260px)',
+          letterSpacing: '-0.075em',
+          fontWeight: 700,
+          lineHeight: 0.95,
+          padding: '24px 0 16px',
+          display: 'flex',
+          alignItems: 'baseline',
+          justifyContent: 'space-between',
+          borderBottom: '1px solid var(--line)',
+          color: 'var(--text)',
+          userSelect: 'none'
+        }}
+      >
+        <span>CHATXA</span>
+        <span style={{ color: 'var(--accent)', fontSize: '0.65em' }}>.</span>
+      </div>
+
+      {/* Footer Bottom Row */}
+      <div
+        className="footer-bottom"
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 20,
+          color: 'var(--muted)',
+          fontSize: 10,
+          paddingTop: 24,
+          fontFamily: 'var(--mono)',
+          letterSpacing: '0.06em',
+          flexWrap: 'wrap'
+        }}
+      >
+        <span>© 2026 CHATXA 4.0 · CREAXA DESIGN SYSTEM MIGRATION</span>
+        <div style={{ display: 'flex', gap: 24 }}>
+          <span>PRIVACY FIRST</span>
+          <span>OFFLINE RUNTIME</span>
+          <span>STANDALONE ARCHITECTURE</span>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .footer-top {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 30px !important;
+          }
+        }
+        @media (max-width: 600px) {
+          .footer-top {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 };

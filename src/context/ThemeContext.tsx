@@ -12,14 +12,17 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<ThemeMode>(() => {
     try {
-      const saved = localStorage.getItem('chatxa_theme') as ThemeMode;
-      if (saved === 'obsidian' || saved === 'ivory' || saved === 'crimson') {
-        return saved;
+      const saved = localStorage.getItem('chatxa_theme');
+      if (saved === 'original' || saved === 'dark' || saved === 'light') {
+        return saved as ThemeMode;
       }
+      if (saved === 'obsidian') return 'dark';
+      if (saved === 'ivory') return 'light';
+      if (saved === 'crimson') return 'original';
     } catch (e) {
       // ignore
     }
-    return 'crimson';
+    return 'original';
   });
 
   useEffect(() => {
@@ -37,9 +40,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const toggleTheme = () => {
     setThemeState((prev) => {
-      if (prev === 'crimson') return 'obsidian';
-      if (prev === 'obsidian') return 'ivory';
-      return 'crimson';
+      if (prev === 'original') return 'dark';
+      if (prev === 'dark') return 'light';
+      return 'original';
     });
   };
 

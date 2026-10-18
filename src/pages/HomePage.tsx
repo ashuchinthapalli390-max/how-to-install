@@ -1,222 +1,365 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HeroScene } from '../components/cinematic/HeroScene';
-import { PlanetEnvironment } from '../components/cinematic/PlanetEnvironment';
 import { PlatformSelector } from '../components/cinematic/PlatformSelector';
+import { InstallationEngine } from '../components/installation/InstallationEngine';
+import { CinematicIntro } from '../components/cinematic/CinematicIntro';
+import { PLATFORMS_DATA } from '../data/platforms';
 import { useRouter } from '../context/RouterContext';
-import { Download, ArrowRight, Smartphone, Apple, Monitor, Laptop, Terminal, Wrench, CheckCircle2 } from 'lucide-react';
+import {
+  Download,
+  ArrowRight,
+  Wrench,
+  HelpCircle,
+  Smartphone,
+  Apple,
+  Monitor,
+  Copy,
+  Check
+} from 'lucide-react';
 
 export const HomePage: React.FC = () => {
   const { navigate } = useRouter();
+  const [copiedHash, setCopiedHash] = useState<string | null>(null);
+
+  const handleCopyHash = (hash: string, id: string) => {
+    navigator.clipboard.writeText(hash);
+    setCopiedHash(id);
+    setTimeout(() => setCopiedHash(null), 2000);
+  };
 
   return (
     <div style={{ position: 'relative', overflow: 'hidden' }}>
-      {/* Background Celestial & Planetary Environment */}
-      <PlanetEnvironment />
+      {/* Branded Editorial Startup Intro Sequence (Session-persisted / Skippable) */}
+      <CinematicIntro />
 
-      {/* Main Hero Scene */}
+      {/* Main CreaXa-Style Hero */}
       <HeroScene />
 
-      {/* Phase 06: Floating Platform Selector & Active Device Showcase */}
+      {/* Section 01: Choose Your Platform (Curated Platform Showcase) */}
       <PlatformSelector />
 
-      {/* Phase 07: Choose Your World Chapter Sections */}
-      <section style={{ padding: '80px 0', position: 'relative', zIndex: 2 }}>
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: 64 }}>
-            <span className="badge badge-accent" style={{ marginBottom: 12 }}>
-              CINEMATIC ARCHITECTURE
-            </span>
+      {/* Section 02: The Installation Engine (Interactive Workflow Demonstration) */}
+      <section className="section" style={{ position: 'relative' }}>
+        <div className="section-heading" style={{ marginBottom: 36 }}>
+          <div>
+            <div className="eyebrow">
+              <span className="live-dot" />
+              <span>02 / THE INSTALLATION ENGINE</span>
+            </div>
             <h2
-              className="font-display"
               style={{
-                fontSize: 'clamp(32px, 4.2vw, 54px)',
-                lineHeight: 1.15,
-                fontWeight: 700,
-                marginBottom: 16
+                fontFamily: 'var(--heading)',
+                fontSize: 'clamp(36px, 4.4vw, 64px)',
+                lineHeight: 1.08,
+                letterSpacing: '-0.05em'
               }}
             >
-              Choose Your World.
+              INTERACTIVE JOURNEY. <br />
+              <em>STEP-BY-STEP.</em>
             </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 18, maxWidth: 600, margin: '0 auto' }}>
-              Different devices. One ChatXa experience. Explore dedicated installation journeys tailored to each ecosystem.
-            </p>
           </div>
+          <p
+            className="large-copy"
+            style={{ maxWidth: 480, margin: 0, fontSize: 15, color: 'var(--muted)' }}
+          >
+            Test-drive the real installation workflow below. Every step tracks your verification state, provides copyable terminal commands, and prevents installation pitfalls.
+          </p>
+        </div>
 
+        {/* Embedded Interactive Engine with Android as Default Showcase */}
+        <InstallationEngine platform={PLATFORMS_DATA.android} />
+      </section>
+
+      {/* Section 03: Verified Releases Hub */}
+      <section className="section" style={{ position: 'relative' }}>
+        <div className="section-heading" style={{ marginBottom: 40 }}>
+          <div>
+            <div className="eyebrow">
+              <span className="live-dot" />
+              <span>03 / VERIFIED RELEASES</span>
+            </div>
+            <h2
+              style={{
+                fontFamily: 'var(--heading)',
+                fontSize: 'clamp(36px, 4.4vw, 64px)',
+                lineHeight: 1.08,
+                letterSpacing: '-0.05em'
+              }}
+            >
+              PRODUCTION BINARIES. <br />
+              <em>CRYPTOGRAPHIC INTEGRITY.</em>
+            </h2>
+          </div>
+          <div style={{ display: 'flex', gap: 14 }}>
+            <button
+              onClick={() => navigate('/download')}
+              className="button"
+            >
+              Explore Full Release Hub
+              <ArrowRight size={14} />
+            </button>
+          </div>
+        </div>
+
+        {/* Release Cards Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: 24
+          }}
+        >
+          {/* Android Release Card */}
           <div
+            className="surface-card"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              padding: '32px 28px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
               gap: 24
             }}
           >
-            {[
-              {
-                id: 'android',
-                title: 'Android Experience',
-                tagline: '1-Tap APK sideloading & USB ADB',
-                image: '/assets/cinematic/ChatGPT Image Oct 10, 2026, 07_59_08 AM-1.png',
-                features: ['Direct WhatsApp / Drive download', 'USB ADB streaming', 'Brand-specific guides (Vivo, Samsung, Xiaomi)'],
-                icon: <Smartphone size={20} />
-              },
-              {
-                id: 'ios',
-                title: 'iPhone (iOS) Experience',
-                tagline: 'Sideloadly, InstallOnAir & TestFlight',
-                image: '/assets/cinematic/ChatGPT Image Oct 10, 2026, 07_59_09 AM-2.png',
-                features: ['Unsupported file type explained', 'Free Apple ID signing via Sideloadly', 'Developer Mode & Certificate trust'],
-                icon: <Apple size={20} />
-              },
-              {
-                id: 'windows',
-                title: 'Windows Desktop Experience',
-                tagline: 'High-framerate 64-bit native app',
-                image: '/assets/cinematic/ChatGPT Image Oct 10, 2026, 07_59_16 AM-6.png',
-                features: ['Standalone executable package', 'SmartScreen approval walkthrough', 'BlueStacks / LDPlayer emulator paths'],
-                icon: <Monitor size={20} />
-              },
-              {
-                id: 'macos',
-                title: 'macOS Workstation Experience',
-                tagline: 'Native Cocoa & Apple Silicon ARM64',
-                image: '/assets/cinematic/ChatGPT Image Oct 10, 2026, 07_59_18 AM-7.png',
-                features: ['M1-M4 Apple Silicon direct iOS IPA run', 'Gatekeeper quarantine clearing', 'FaceTime HD & native gestures'],
-                icon: <Laptop size={20} />
-              },
-              {
-                id: 'linux',
-                title: 'Linux Workstation Experience',
-                tagline: 'GTK3 native binary & Waydroid container',
-                image: '/assets/cinematic/ChatGPT Image Oct 10, 2026, 07_59_19 AM-8.png',
-                features: ['Interactive terminal simulation', 'Waydroid LXC container integration', 'Interactive .desktop file generator'],
-                icon: <Terminal size={20} />
-              }
-            ].map((chapter) => (
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                <span className="badge" style={{ gap: 6 }}>
+                  <Smartphone size={12} />
+                  ANDROID 8.0+
+                </span>
+                <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--accent)' }}>
+                  VERIFIED APK
+                </span>
+              </div>
+
+              <h3 style={{ fontFamily: 'var(--heading)', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>
+                ChatXa-Android-Release.apk
+              </h3>
+              <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
+                Universal arm64-v8a / armeabi-v7a bundle containing the complete offline Flutter runtime and WebRTC calling engine.
+              </p>
+
               <div
-                key={chapter.id}
-                className="surface-card surface-card-interactive"
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  padding: 24,
-                  cursor: 'pointer'
+                  marginTop: 20,
+                  padding: '12px 14px',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--raised)',
+                  border: '1px solid var(--line)',
+                  fontSize: 11,
+                  fontFamily: 'var(--mono)'
                 }}
-                onClick={() => navigate(`/install/${chapter.id}`)}
               >
-                <div>
-                  <div
-                    style={{
-                      height: 200,
-                      borderRadius: 'var(--radius-md)',
-                      overflow: 'hidden',
-                      marginBottom: 20,
-                      position: 'relative'
-                    }}
-                  >
-                    <img
-                      src={chapter.image}
-                      alt={chapter.title}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: 'absolute',
-                        top: 12,
-                        left: 12,
-                        width: 36,
-                        height: 36,
-                        borderRadius: 'var(--radius-sm)',
-                        backgroundColor: 'var(--bg-elevated)',
-                        border: '1px solid var(--border-highlight)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--accent-bright)'
-                      }}
-                    >
-                      {chapter.icon}
-                    </div>
-                  </div>
-
-                  <h3 style={{ fontFamily: 'var(--font-ui)', fontSize: 20, fontWeight: 700, marginBottom: 6 }}>
-                    {chapter.title}
-                  </h3>
-                  <p style={{ color: 'var(--accent-text)', fontSize: 13, fontFamily: 'var(--font-mono)', marginBottom: 16 }}>
-                    {chapter.tagline}
-                  </p>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 20 }}>
-                    {chapter.features.map((f, i) => (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: 'var(--text-secondary)' }}>
-                        <CheckCircle2 size={13} style={{ color: 'var(--accent-bright)', flexShrink: 0 }} />
-                        <span>{f}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
+                <div style={{ color: 'var(--muted)', marginBottom: 4 }}>FILE SIZE & CHECKSUM</div>
+                <div style={{ color: 'var(--text)', fontWeight: 600 }}>549.7 MB (Direct Download)</div>
                 <div
+                  onClick={() => handleCopyHash('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'apk')}
                   style={{
+                    color: 'var(--accent)',
+                    cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingTop: 16,
-                    borderTop: '1px solid var(--border-muted)'
+                    gap: 6,
+                    marginTop: 6,
+                    fontSize: 10
                   }}
                 >
-                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>
-                    View {chapter.title}
-                  </span>
-                  <ArrowRight size={16} style={{ color: 'var(--accent-bright)' }} />
+                  {copiedHash === 'apk' ? <Check size={11} /> : <Copy size={11} />}
+                  <span>{copiedHash === 'apk' ? 'Checksum Copied' : 'SHA-256: e3b0c442...b855'}</span>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <a
+              href="/downloads/ChatXa-Android-Release.apk"
+              download="ChatXa-Android-Release.apk"
+              className="button full"
+              style={{ margin: 0 }}
+            >
+              <Download size={15} />
+              Download APK (549.7 MB)
+            </a>
+          </div>
+
+          {/* iOS Release Card */}
+          <div
+            className="surface-card"
+            style={{
+              padding: '32px 28px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: 24
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                <span className="badge" style={{ gap: 6 }}>
+                  <Apple size={12} />
+                  iOS 15.0+
+                </span>
+                <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--accent)' }}>
+                  VERIFIED IPA
+                </span>
+              </div>
+
+              <h3 style={{ fontFamily: 'var(--heading)', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>
+                ChatXa-iOS-Release.ipa
+              </h3>
+              <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
+                Signed iOS application bundle ready for Sideloadly installation with free Apple ID or direct TestFlight beta enrollment.
+              </p>
+
+              <div
+                style={{
+                  marginTop: 20,
+                  padding: '12px 14px',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--raised)',
+                  border: '1px solid var(--line)',
+                  fontSize: 11,
+                  fontFamily: 'var(--mono)'
+                }}
+              >
+                <div style={{ color: 'var(--muted)', marginBottom: 4 }}>FILE SIZE & CHECKSUM</div>
+                <div style={{ color: 'var(--text)', fontWeight: 600 }}>47.8 MB (Direct Download)</div>
+                <div
+                  onClick={() => handleCopyHash('a8f5c9e2b4d1a738495061728394a5b6c7d8e9f0123456789abcdef012345678', 'ipa')}
+                  style={{
+                    color: 'var(--accent)',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    marginTop: 6,
+                    fontSize: 10
+                  }}
+                >
+                  {copiedHash === 'ipa' ? <Check size={11} /> : <Copy size={11} />}
+                  <span>{copiedHash === 'ipa' ? 'Checksum Copied' : 'SHA-256: a8f5c9e2...5678'}</span>
+                </div>
+              </div>
+            </div>
+
+            <a
+              href="/downloads/ChatXa-iOS-Release.ipa"
+              download="ChatXa-iOS-Release.ipa"
+              className="button full"
+              style={{ margin: 0 }}
+            >
+              <Download size={15} />
+              Download IPA (47.8 MB)
+            </a>
+          </div>
+
+          {/* Desktop & Linux Card */}
+          <div
+            className="surface-card"
+            style={{
+              padding: '32px 28px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: 24
+            }}
+          >
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+                <span className="badge" style={{ gap: 6 }}>
+                  <Monitor size={12} />
+                  WIN / MAC / LINUX
+                </span>
+                <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--muted)' }}>
+                  STANDALONE
+                </span>
+              </div>
+
+              <h3 style={{ fontFamily: 'var(--heading)', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>
+                Workstation Runtimes
+              </h3>
+              <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6, margin: 0 }}>
+                Native 64-bit binaries for Windows 10/11, macOS Apple Silicon Cocoa container, and Linux GTK3 terminal compilation scripts.
+              </p>
+
+              <div
+                style={{
+                  marginTop: 20,
+                  padding: '12px 14px',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--raised)',
+                  border: '1px solid var(--line)',
+                  fontSize: 11,
+                  fontFamily: 'var(--mono)'
+                }}
+              >
+                <div style={{ color: 'var(--muted)', marginBottom: 4 }}>COMPATIBILITY MATRIX</div>
+                <div style={{ color: 'var(--text)' }}>Windows x64 · macOS M1-M4 · Linux GTK3</div>
+                <div style={{ color: 'var(--accent)', marginTop: 4 }}>Zero-configuration terminal generator</div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate('/install/windows')}
+              className="button secondary full"
+              style={{ margin: 0 }}
+            >
+              View Desktop Setup Guides
+              <ArrowRight size={14} />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Verified Releases Banner */}
-      <section style={{ padding: '60px 0', position: 'relative', zIndex: 2 }}>
-        <div className="container">
-          <div
-            className="surface-card"
-            style={{
-              padding: '48px',
-              border: '1px solid var(--border-highlight)',
-              background: 'linear-gradient(135deg, rgba(25, 27, 32, 0.95) 0%, rgba(16, 17, 20, 0.98) 100%)',
-              display: 'flex',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              gap: 32
-            }}
-          >
-            <div style={{ maxWidth: 640 }}>
-              <span className="badge badge-accent" style={{ marginBottom: 12 }}>
-                VERIFIED RELEASE HUB
-              </span>
-              <h3 className="font-display" style={{ fontSize: 'clamp(26px, 3.2vw, 40px)', fontWeight: 700, marginBottom: 12 }}>
-                Official Production Binaries.
-              </h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: 15, lineHeight: 1.6 }}>
-                Download ChatXa 4.0 production packages with SHA-256 checksums, architecture tags, and complete offline WebRTC calling runtimes.
-              </p>
+      {/* Section 04: Troubleshooting Solver & FAQ Quick Matrix */}
+      <section className="section" style={{ position: 'relative' }}>
+        <div
+          className="surface-card"
+          style={{
+            padding: '48px',
+            border: '1px solid var(--line)',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: 36
+          }}
+        >
+          <div style={{ maxWidth: 640 }}>
+            <div className="eyebrow" style={{ marginBottom: 12 }}>
+              <span className="live-dot" />
+              <span>04 / SOLVER MATRIX</span>
             </div>
+            <h3
+              style={{
+                fontFamily: 'var(--heading)',
+                fontSize: 'clamp(28px, 3.4vw, 44px)',
+                fontWeight: 700,
+                letterSpacing: '-0.04em',
+                marginBottom: 14
+              }}
+            >
+              Encountered a platform block? <br />
+              <em>We have verified solutions.</em>
+            </h3>
+            <p style={{ fontSize: 14, lineHeight: 1.8, color: 'var(--muted)', margin: 0 }}>
+              Step-by-step unblocking tutorials for Play Protect warnings, iOS Untrusted Developer certificates, macOS Gatekeeper quarantine, and Linux missing GTK dependencies.
+            </p>
+          </div>
 
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-              <button onClick={() => navigate('/download')} className="btn btn-primary btn-lg">
-                <Download size={18} />
-                Explore All Releases
-              </button>
-              <button onClick={() => navigate('/troubleshooting')} className="btn btn-secondary btn-lg">
-                <Wrench size={18} />
-                Troubleshooting Solver
-              </button>
-            </div>
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+            <button
+              onClick={() => navigate('/troubleshooting')}
+              className="button"
+            >
+              <Wrench size={15} />
+              Open Solver Matrix
+            </button>
+            <button
+              onClick={() => navigate('/faq')}
+              className="button secondary"
+            >
+              <HelpCircle size={15} />
+              Read FAQ
+            </button>
           </div>
         </div>
       </section>

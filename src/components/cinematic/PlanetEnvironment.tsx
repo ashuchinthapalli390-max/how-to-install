@@ -39,7 +39,7 @@ export const PlanetEnvironment: React.FC = () => {
           borderRadius: '50%',
           background: 'var(--planet-glow)',
           filter: 'blur(10px)',
-          opacity: theme === 'ivory' ? 0.35 : 0.85,
+          opacity: theme === 'light' ? 0.35 : 0.85,
           transition: 'all 0.8s ease'
         }}
       />
@@ -53,16 +53,8 @@ export const PlanetEnvironment: React.FC = () => {
           width: 'clamp(340px, 45vw, 680px)',
           height: 'clamp(340px, 45vw, 680px)',
           borderRadius: '50%',
-          border: theme === 'crimson'
-            ? '2px solid rgba(220, 24, 44, 0.45)'
-            : theme === 'obsidian'
-            ? '2px solid rgba(212, 216, 226, 0.4)'
-            : '2px solid rgba(150, 21, 38, 0.25)',
-          boxShadow: theme === 'crimson'
-            ? '0 0 50px rgba(220, 24, 44, 0.5), inset 0 0 30px rgba(220, 24, 44, 0.3)'
-            : theme === 'obsidian'
-            ? '0 0 50px rgba(212, 216, 226, 0.4), inset 0 0 30px rgba(212, 216, 226, 0.2)'
-            : '0 0 30px rgba(150, 21, 38, 0.2)',
+          border: '2px solid var(--accent)',
+          boxShadow: '0 0 50px var(--accent-glow), inset 0 0 30px var(--accent-glow)',
           transition: 'all 0.8s ease'
         }}
       />

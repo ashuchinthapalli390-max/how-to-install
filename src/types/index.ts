@@ -1,6 +1,6 @@
 export type PlatformId = 'android' | 'ios' | 'windows' | 'macos' | 'linux';
 
-export type ThemeMode = 'crimson' | 'obsidian' | 'ivory';
+export type ThemeMode = 'original' | 'dark' | 'light';
 
 export interface InstallationStep {
   stepNumber: number;
