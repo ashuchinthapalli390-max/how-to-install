@@ -69,32 +69,31 @@ export const OFFICIAL_GUIDES_DATA: OfficialGuideFile[] = [
 
 export const RELEASES_DATA: ReleaseArtifact[] = [
   {
-    id: 'app-store-bundle',
-    platform: 'all',
-    platformName: 'Universal App Store Bundle',
+    id: 'android-apk-compressed',
+    platform: 'android',
+    platformName: 'Android (Compressed Package)',
     version: '4.0.0 (Build 40)',
-    fileName: 'ChatXa-App-Store.zip',
-    fileSize: '221.2 MB',
-    architecture: 'Universal (All Operating Systems)',
-    fileType: 'Complete App Store Release Archive (.zip)',
+    fileName: 'ChatXa-Android-Release.zip',
+    fileSize: '165.9 MB (Compressed)',
+    architecture: 'Universal (arm64-v8a, armeabi-v7a, x86_64)',
+    fileType: 'Compressed APK Archive (.zip)',
     releaseDate: 'October 2026',
-    sha256: '0b07c6f74d7e2dde7b9d73d29ffb38a4054a81c1fd81852a530c8c1e5eed1f2d',
-    minOs: 'Universal cross-platform archive',
+    sha256: '2b31f2dbf011e6e5b3a7a7dc11bb124ed0bb831bab745bf971927a8c1da5e1ef',
+    minOs: 'Android 8.0 (API 26) or higher',
     status: 'verified',
-    downloadUrl: '/downloads/ChatXa-App-Store.zip',
-    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\App Store.zip',
+    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-Android-Release.zip',
+    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\install\\public\\downloads\\ChatXa-Android-Release.zip',
     releaseNotes: [
-      'Master distribution bundle containing both verified release binaries and all technical guides.',
-      'Includes ChatXa-Android-Release.apk (549.7 MB uncompressed).',
-      'Includes ChatXa-iOS-Release.ipa (47.8 MB).',
-      'Includes all 6 technical installation guides and deployment readmes.',
-      'Compressed at 221 MB for fast downloading and offline pendrive/LAN distribution.'
+      '★ RECOMMENDED FOR MOBILE: Optimized compressed package with 70% data savings (165 MB vs 550 MB).',
+      'Guaranteed high-speed CDN download without network timeouts or bandwidth throttling.',
+      'Contains ChatXa-Android-Release.apk with zero data loss.',
+      'Extract with built-in Files app, ZArchiver, or RAR, then tap to install.'
     ]
   },
   {
-    id: 'android-apk',
+    id: 'android-apk-direct',
     platform: 'android',
-    platformName: 'Android',
+    platformName: 'Android (Direct Standalone APK)',
     version: '4.0.0 (Build 40)',
     fileName: 'ChatXa-Android-Release.apk',
     fileSize: '549.7 MB',
@@ -104,12 +103,11 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '92637def761092a58373fd26ae9d4bfdeab391bdabf9198b96d138bd2af1fb05',
     minOs: 'Android 8.0 (API 26) or higher',
     status: 'verified',
-    downloadUrl: '/downloads/ChatXa-Android-Release.apk',
+    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-Android-Release.apk',
     directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\app_store\\ChatXa-Android-Release.apk',
     releaseNotes: [
-      'Production release with complete offline Flutter engine and WebRTC audio/video calling libraries.',
-      'Supabase realtime message synchronization and presence indicators.',
-      'Camera snap filters, media caching, and background push notifications.',
+      'Direct uncompressed standalone APK ready for immediate one-tap installation.',
+      'Contains complete uncompressed native symbols for WebRTC hardware acceleration.',
       'Verified compatibility across Samsung One UI, Xiaomi HyperOS, Vivo Funtouch OS, and Pixel Android 15.'
     ]
   },
@@ -126,13 +124,35 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '4b9bc55c535381be022bd3540c09f1b4a4eda375dd8e5ab2bdec6812b9e51362',
     minOs: 'iOS 13.0 or higher (iPhone & iPod touch)',
     status: 'verified',
-    downloadUrl: '/downloads/ChatXa-iOS-Release.ipa',
+    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-iOS-Release.ipa',
     directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\app_store\\ChatXa-iOS-Release.ipa',
     releaseNotes: [
       'Bundle Identifier: com.chatxa.chatxa',
       'Optimized for sideloading via Sideloadly, InstallOnAir, Scarlet, or 3uTools.',
       'Supports Apple Silicon Mac direct execution via Sideloadly / PlayCover.',
       'Integrated LiveKit iOS CallKit audio sessions and hardware-accelerated video rendering.'
+    ]
+  },
+  {
+    id: 'app-store-bundle',
+    platform: 'all',
+    platformName: 'Universal App Store Bundle',
+    version: '4.0.0 (Build 40)',
+    fileName: 'ChatXa-App-Store.zip',
+    fileSize: '221.2 MB',
+    architecture: 'Universal (All Operating Systems)',
+    fileType: 'Complete App Store Release Archive (.zip)',
+    releaseDate: 'October 2026',
+    sha256: '0b07c6f74d7e2dde7b9d73d29ffb38a4054a81c1fd81852a530c8c1e5eed1f2d',
+    minOs: 'Universal cross-platform archive',
+    status: 'verified',
+    downloadUrl: 'https://github.com/ashuchinthapalli390-max/how-to-install/releases/download/v4.0.0/ChatXa-App-Store.zip',
+    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\App Store.zip',
+    releaseNotes: [
+      'Master distribution bundle containing both verified release binaries and all technical guides.',
+      'Includes ChatXa-Android-Release.apk (549.7 MB uncompressed) & ChatXa-iOS-Release.ipa (47.8 MB).',
+      'Includes all 6 technical installation guides and deployment readmes.',
+      'Recommended for offline pendrive and LAN distribution.'
     ]
   },
   {
