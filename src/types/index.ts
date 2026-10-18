@@ -93,3 +93,59 @@ export interface FaqItem {
   platform?: PlatformId | 'general';
   tags: string[];
 }
+
+export type TutorialMode = 'watch' | 'interactive' | 'read';
+
+export type GuideLanguage = 'en' | 'te' | 'hi' | 'ta' | 'ml';
+
+export interface InteractiveHotspotData {
+  id: string;
+  x: number; // percentage 0-100
+  y: number; // percentage 0-100
+  label: string;
+  targetAction: string;
+  tooltip: {
+    what: string;
+    why: string;
+    where: string;
+    whatNext: string;
+    troubleshooting: string;
+  };
+}
+
+export interface SimulatorScreenState {
+  stepNumber: number;
+  screenId: string;
+  title: string;
+  osBadge: string;
+  subtitle: string;
+  hotspots?: InteractiveHotspotData[];
+  narrationText?: Record<GuideLanguage, string>;
+}
+
+export interface DecisionTreeNode {
+  id: string;
+  platform: PlatformId | 'all';
+  symptom: string;
+  question: string;
+  options: Array<{
+    label: string;
+    nextNodeId?: string;
+    solution?: {
+      title: string;
+      explanation: string;
+      commands?: string[];
+      steps: string[];
+      officialDocUrl?: string;
+    };
+  }>;
+}
+
+export interface ProgressDashboardState {
+  selectedPlatform: PlatformId;
+  selectedMethodId: string;
+  currentStepIndex: number;
+  totalSteps: number;
+  completedStepIds: string[];
+  lastUpdated: string;
+}

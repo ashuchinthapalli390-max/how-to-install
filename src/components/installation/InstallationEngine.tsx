@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import type { PlatformInfo, InstallationStep } from '../../types';
-import { TerminalSimulator } from './TerminalSimulator';
-import { DesktopLauncherGenerator } from './DesktopLauncherGenerator';
+import React, { useState, useEffect, useRef } from 'react';
+import type { PlatformInfo, InstallationStep, TutorialMode, GuideLanguage } from '../../types';
 import { useRouter } from '../../context/RouterContext';
+import { TutorialModeSelector } from './TutorialModeSelector';
+import { StepExplanationPanel } from './StepExplanationPanel';
+import { ProgressDashboard } from './ProgressDashboard';
+import { AndroidSimulator } from './simulators/AndroidSimulator';
+import { IOSSimulator } from './simulators/IOSSimulator';
+import { WindowsSimulator } from './simulators/WindowsSimulator';
+import { MacOSSimulator } from './simulators/MacOSSimulator';
+import { LinuxSimulator } from './simulators/LinuxSimulator';
 import {
   Check,
   CheckCircle2,
@@ -31,6 +37,14 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
   // Current step index (0-indexed)
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
+  // Tutorial modes & controls
+  const [mode, setMode] = useState<TutorialMode>('watch');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [showHotspots, setShowHotspots] = useState(true);
+  const [language, setLanguage] = useState<GuideLanguage>('en');
+  const [muted, setMuted] = useState(true);
+
   // Completed steps map: key = `${platform.id}-${method.id}-${stepNumber}`, value = boolean
   const [completedSteps, setCompletedSteps] = useState<Record<string, boolean>>(() => {
     try {
@@ -42,16 +56,19 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
   });
 
   const [copiedCommand, setCopiedCommand] = useState(false);
+  const autoPlayTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Sync method change with URL
   const handleSelectMethod = (methodId: string) => {
     setSearchParam('method', methodId);
     setCurrentStepIndex(0);
+    setIsPlaying(false);
   };
 
   // Reset progress for this method
   const handleRestart = () => {
     setCurrentStepIndex(0);
+    setIsPlaying(false);
     const updated = { ...completedSteps };
     currentMethod.steps.forEach((s) => {
       delete updated[`${platform.id}-${currentMethod.id}-${s.stepNumber}`];
@@ -60,6 +77,13 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
     try {
       localStorage.setItem(`chatxa_progress_${platform.id}`, JSON.stringify(updated));
     } catch (e) {}
+  };
+
+  // Advance step (called by simulator or user)
+  const advanceStep = () => {
+    if (currentStepIndex < currentMethod.steps.length - 1) {
+      setCurrentStepIndex((prev) => prev + 1);
+    }
   };
 
   // Mark step complete
@@ -85,11 +109,30 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
       } catch (e) {}
 
       // Advance to next step if not last
-      if (currentStepIndex < currentMethod.steps.length - 1) {
-        setTimeout(() => setCurrentStepIndex((prev) => prev + 1), 350);
-      }
+      advanceStep();
     }
   };
+
+  // Watch Mode Auto-Play Timer Driver
+  useEffect(() => {
+    if (mode !== 'watch' || !isPlaying) {
+      if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
+      return;
+    }
+
+    const stepInterval = Math.round(3600 / playbackSpeed);
+    autoPlayTimerRef.current = setTimeout(() => {
+      if (currentStepIndex < currentMethod.steps.length - 1) {
+        setCurrentStepIndex((prev) => prev + 1);
+      } else {
+        setIsPlaying(false);
+      }
+    }, stepInterval);
+
+    return () => {
+      if (autoPlayTimerRef.current) clearTimeout(autoPlayTimerRef.current);
+    };
+  }, [currentMethod.steps.length, currentStepIndex, isPlaying, mode, playbackSpeed]);
 
   const currentStep: InstallationStep = currentMethod.steps[currentStepIndex] || currentMethod.steps[0];
   const isStepComplete = Boolean(completedSteps[`${platform.id}-${currentMethod.id}-${currentStep.stepNumber}`]);
@@ -100,11 +143,9 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
     setTimeout(() => setCopiedCommand(false), 2000);
   };
 
-  const progressPercent = Math.round(
-    (currentMethod.steps.filter((s) => completedSteps[`${platform.id}-${currentMethod.id}-${s.stepNumber}`]).length /
-      currentMethod.steps.length) *
-      100
-  );
+  const completedCount = currentMethod.steps.filter(
+    (s) => completedSteps[`${platform.id}-${currentMethod.id}-${s.stepNumber}`]
+  ).length;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
@@ -172,7 +213,117 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
         })}
       </div>
 
-      {/* 2. Interactive Workflow Container (CreaXa Story Interface) */}
+      {/* 2. Tutorial Mode Selector (Watch Demo, Try Interactive, Read Steps) */}
+      <TutorialModeSelector
+        mode={mode}
+        onSelectMode={(m) => {
+          setMode(m);
+          if (m === 'watch') setIsPlaying(true);
+          else setIsPlaying(false);
+        }}
+        isPlaying={isPlaying}
+        onTogglePlay={() => setIsPlaying((prev) => !prev)}
+        playbackSpeed={playbackSpeed}
+        onChangeSpeed={setPlaybackSpeed}
+        showHotspots={showHotspots}
+        onToggleHotspots={() => setShowHotspots((prev) => !prev)}
+        language={language}
+        onChangeLanguage={setLanguage}
+        muted={muted}
+        onToggleMute={() => setMuted((prev) => !prev)}
+        onReset={handleRestart}
+      />
+
+      {/* 3. Personal Installation Progress Dashboard */}
+      <ProgressDashboard
+        platformId={platform.id}
+        methodName={currentMethod.name}
+        totalSteps={currentMethod.steps.length}
+        completedCount={completedCount}
+        onReset={handleRestart}
+      />
+
+      {/* 4. Interactive Simulation Studio (When in Watch or Interactive Mode) */}
+      {mode !== 'read' && (
+        <div
+          className="surface-card"
+          style={{
+            padding: '36px 24px',
+            backgroundColor: 'var(--surface)',
+            border: '1px solid var(--line)',
+            borderRadius: 'var(--radius)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 20
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', maxWidth: 680, borderBottom: '1px solid var(--line)', paddingBottom: 12 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span className="live-dot" />
+              <span style={{ fontFamily: 'var(--heading)', fontSize: 12, fontWeight: 700, textTransform: 'uppercase' }}>
+                {platform.name} Device Simulation Studio
+              </span>
+            </div>
+            <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--accent)' }}>
+              STAGE 0{currentStepIndex + 1} OF 0{currentMethod.steps.length}
+            </span>
+          </div>
+
+          {/* Render dedicated OS simulator component */}
+          {platform.id === 'android' && (
+            <AndroidSimulator
+              currentStepIndex={currentStepIndex}
+              onAdvanceStep={advanceStep}
+              mode={mode}
+              showHotspots={showHotspots}
+            />
+          )}
+
+          {platform.id === 'ios' && (
+            <IOSSimulator
+              currentStepIndex={currentStepIndex}
+              onAdvanceStep={advanceStep}
+              mode={mode}
+              showHotspots={showHotspots}
+              activeMethodId={currentMethod.id}
+            />
+          )}
+
+          {platform.id === 'windows' && (
+            <WindowsSimulator
+              currentStepIndex={currentStepIndex}
+              onAdvanceStep={advanceStep}
+              mode={mode}
+              showHotspots={showHotspots}
+            />
+          )}
+
+          {platform.id === 'macos' && (
+            <MacOSSimulator
+              currentStepIndex={currentStepIndex}
+              onAdvanceStep={advanceStep}
+              mode={mode}
+              showHotspots={showHotspots}
+            />
+          )}
+
+          {platform.id === 'linux' && (
+            <LinuxSimulator
+              currentStepIndex={currentStepIndex}
+              onAdvanceStep={advanceStep}
+              mode={mode}
+              showHotspots={showHotspots}
+              activeMethodId={currentMethod.id}
+            />
+          )}
+        </div>
+      )}
+
+      {/* 5. Visual Help Engine (The 5-question WHAT, WHY, WHERE, WHAT NEXT, TROUBLESHOOTING) */}
+      <StepExplanationPanel step={currentStep} platformName={platform.name} />
+
+      {/* 6. Structured Workflow Container with Timeline Pills and Step Controls */}
       <div
         className="surface-card"
         style={{
@@ -240,9 +391,6 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div style={{ fontSize: 11, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>
-              COMPLETION: <strong style={{ color: 'var(--text)' }}>{progressPercent}%</strong>
-            </div>
             <button
               onClick={handleRestart}
               className="text-link"
@@ -367,16 +515,6 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
             </div>
           )}
 
-          {/* Interactive Terminal Simulator for Linux */}
-          {platform.id === 'linux' && currentStepIndex === 2 && (
-            <TerminalSimulator command={currentStep.command || 'sudo apt-get install -y libgtk-3-0 libayatana-appindicator3-1'} />
-          )}
-
-          {/* Interactive Desktop Launcher Generator for Linux */}
-          {platform.id === 'linux' && currentStepIndex === 5 && (
-            <DesktopLauncherGenerator />
-          )}
-
           {/* Warnings & Tips callouts */}
           {currentStep.warning && (
             <div
@@ -459,7 +597,7 @@ export const InstallationEngine: React.FC<InstallationEngineProps> = ({ platform
 
               {currentStepIndex < currentMethod.steps.length - 1 ? (
                 <button
-                  onClick={() => setCurrentStepIndex((prev) => prev + 1)}
+                  onClick={() => advanceStep()}
                   className="button"
                   style={{ minHeight: 44, padding: '10px 20px', fontSize: 12, gap: 8 }}
                 >

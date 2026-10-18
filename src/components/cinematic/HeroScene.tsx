@@ -3,7 +3,8 @@ import { useRouter } from '../../context/RouterContext';
 import {
   ArrowRight,
   ArrowUpRight,
-  ShieldCheck
+  ShieldCheck,
+  Play
 } from 'lucide-react';
 
 interface DeviceShowcase {
@@ -264,6 +265,24 @@ export const HeroScene: React.FC = () => {
             >
               Explore all platforms
               <ArrowUpRight size={15} />
+            </button>
+
+            <button
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('chatxa_launch_expanded_intro'));
+              }}
+              className="button secondary"
+              style={{
+                gap: 10,
+                padding: '16px 22px',
+                fontSize: 13,
+                borderColor: 'var(--accent)',
+                color: 'var(--accent)'
+              }}
+              title="Launch 10-scene expanded cinematic intro"
+            >
+              <Play size={13} fill="currentColor" />
+              Watch Full Experience
             </button>
           </div>
 

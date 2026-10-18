@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import { TROUBLESHOOTING_DATA } from '../data/troubleshooting';
 import { useRouter } from '../context/RouterContext';
 import type { PlatformId } from '../types';
-import { Wrench, Search, CheckCircle2, ArrowRight, Smartphone, Apple, Monitor, Laptop, Terminal, ChevronDown, ChevronUp } from 'lucide-react';
+import { DecisionTreeSolver } from '../components/troubleshooting/DecisionTreeSolver';
+import {
+  Wrench,
+  Search,
+  CheckCircle2,
+  Smartphone,
+  Apple,
+  Monitor,
+  Laptop,
+  Terminal,
+  ChevronDown,
+  ChevronUp
+} from 'lucide-react';
 
 export const TroubleshootingPage: React.FC = () => {
-  const { navigate, searchParams } = useRouter();
+  const { searchParams } = useRouter();
 
   const initialOs = (searchParams.get('os') as PlatformId) || 'all';
   const initialQuery = searchParams.get('q') || '';
@@ -38,255 +50,196 @@ export const TroubleshootingPage: React.FC = () => {
 
   return (
     <div style={{ paddingTop: 'calc(var(--nav-height) + 40px)', paddingBottom: 100, minHeight: '90vh' }}>
-      <div className="container">
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <span className="badge badge-accent" style={{ marginBottom: 12 }}>
-            INTERACTIVE ISSUE SOLVER
-          </span>
-          <h1 className="font-display" style={{ fontSize: 'clamp(36px, 4.5vw, 60px)', fontWeight: 700, marginBottom: 12 }}>
-            Something not working?
+        <div style={{ textAlign: 'center' }}>
+          <div className="eyebrow" style={{ justifyContent: 'center', marginBottom: 12 }}>
+            <span className="live-dot" />
+            <span>INTERACTIVE ISSUE SOLVER & DIAGNOSTICS</span>
+          </div>
+          <h1
+            style={{
+              fontFamily: 'var(--heading)',
+              fontSize: 'clamp(36px, 4.8vw, 64px)',
+              fontWeight: 700,
+              letterSpacing: '-0.05em',
+              lineHeight: 1.1,
+              marginBottom: 16
+            }}
+          >
+            Something not working? <br />
+            <em>Follow verified resolutions.</em>
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: 18, maxWidth: 600, margin: '0 auto' }}>
-            Find your issue. Follow the fix. Diagnoses and resolutions verified against real Android, iOS, Windows, Mac, and Linux hardware.
+          <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: 620, margin: '0 auto', lineHeight: 1.7 }}>
+            Interactive decision tree and comprehensive error catalog verified against real Android, iOS, Windows, Mac, and Linux hardware.
           </p>
         </div>
 
-        {/* Search Bar */}
-        <div style={{ maxWidth: 680, margin: '0 auto 36px', position: 'relative' }}>
+        {/* Feature 1: Interactive Diagnostic Decision Tree */}
+        <DecisionTreeSolver />
+
+        {/* Feature 2: Searchable Issue Catalog */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16 }}>
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 4 }}>ERROR CATALOG</div>
+              <h3 style={{ fontFamily: 'var(--heading)', fontSize: 24, fontWeight: 700, margin: 0 }}>
+                Common Installation Blockers
+              </h3>
+            </div>
+
+            {/* Platform filter tabs */}
+            <div style={{ display: 'flex', gap: 6, overflowX: 'auto', maxWidth: '100%' }}>
+              {[
+                { id: 'all', name: 'All' },
+                { id: 'android', name: 'Android' },
+                { id: 'ios', name: 'iOS' },
+                { id: 'windows', name: 'Windows' },
+                { id: 'macos', name: 'macOS' },
+                { id: 'linux', name: 'Linux' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedOs(tab.id)}
+                  className="button secondary sm"
+                  style={{
+                    minHeight: 32,
+                    padding: '6px 14px',
+                    fontSize: 11,
+                    borderColor: selectedOs === tab.id ? 'var(--accent)' : 'var(--line)',
+                    color: selectedOs === tab.id ? 'var(--accent)' : 'var(--muted)'
+                  }}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Search Bar */}
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: 12,
-              padding: '14px 20px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: 'var(--bg-elevated)',
-              border: '1px solid var(--border-highlight)',
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px var(--accent-subtle)'
+              padding: '12px 18px',
+              borderRadius: 'var(--radius)',
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--line)'
             }}
           >
-            <Search size={20} style={{ color: 'var(--accent-bright)' }} />
+            <Search size={18} style={{ color: 'var(--muted)' }} />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by error message (e.g. 'Play Protect', 'Unsupported file', 'SmartScreen', 'Quarantine')..."
+              placeholder="Filter by error string (e.g. 'Play Protect', 'Unsupported file type', 'SmartScreen', 'Quarantine', 'GTK')..."
               style={{
                 flex: 1,
                 background: 'none',
                 border: 'none',
                 outline: 'none',
-                color: 'var(--text-primary)',
-                fontFamily: 'var(--font-ui)',
-                fontSize: 15
+                color: 'var(--text)',
+                fontSize: 14
               }}
             />
             {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', fontSize: 12 }}
-              >
+              <button onClick={() => setSearchQuery('')} className="text-link" style={{ fontSize: 11, border: 0 }}>
                 Clear
               </button>
             )}
           </div>
-        </div>
 
-        {/* Operating System Filter Tabs */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40 }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              gap: 8,
-              padding: '6px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: 'var(--bg-elevated)',
-              border: '1px solid var(--border-muted)',
-              overflowX: 'auto',
-              maxWidth: '100%'
-            }}
-          >
-            {[
-              { id: 'all', name: 'All Issues' },
-              { id: 'android', name: 'Android' },
-              { id: 'ios', name: 'iPhone (iOS)' },
-              { id: 'windows', name: 'Windows' },
-              { id: 'macos', name: 'macOS' },
-              { id: 'linux', name: 'Linux' }
-            ].map((os) => {
-              const isActive = selectedOs === os.id;
-              return (
-                <button
-                  key={os.id}
-                  onClick={() => setSelectedOs(os.id)}
-                  style={{
-                    padding: '8px 16px',
-                    borderRadius: 'var(--radius-full)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontFamily: 'var(--font-ui)',
-                    fontSize: 13,
-                    fontWeight: 600,
-                    backgroundColor: isActive ? 'var(--accent-bright)' : 'transparent',
-                    color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
-                    transition: 'all var(--transition-fast)',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  {os.name}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Issues List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-          {filteredIssues.length === 0 ? (
-            <div className="surface-card" style={{ padding: 48, textAlign: 'center', color: 'var(--text-muted)' }}>
-              No issues found matching "{searchQuery}" under the selected operating system.
-            </div>
-          ) : (
-            filteredIssues.map((issue) => {
+          {/* Issues Accordion List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {filteredIssues.map((issue) => {
               const isExpanded = expandedId === issue.id;
 
               return (
                 <div
                   key={issue.id}
+                  id={issue.id}
                   className="surface-card"
                   style={{
-                    padding: 24,
-                    border: isExpanded ? '1px solid var(--border-highlight)' : '1px solid var(--border-muted)',
-                    transition: 'all var(--transition-fast)'
+                    padding: 22,
+                    border: `1px solid ${isExpanded ? 'var(--accent)' : 'var(--line)'}`,
+                    transition: 'border-color 0.2s ease'
                   }}
                 >
-                  {/* Issue Header */}
                   <div
                     onClick={() => setExpandedId(isExpanded ? null : issue.id)}
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      gap: 16
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                      <div
-                        style={{
-                          width: 32,
-                          height: 32,
-                          borderRadius: 8,
-                          backgroundColor: 'var(--accent-subtle)',
-                          color: 'var(--accent-bright)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          flexShrink: 0
-                        }}
-                      >
-                        {getPlatformIcon(issue.platform)}
-                      </div>
+                      <span style={{ color: 'var(--accent)' }}>{getPlatformIcon(issue.platform)}</span>
                       <div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
-                          <span className="badge" style={{ fontSize: 10 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                          <span className="badge" style={{ fontSize: 9 }}>{issue.category}</span>
+                          <span style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--muted)', textTransform: 'uppercase' }}>
                             {issue.platform.toUpperCase()}
                           </span>
-                          <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
-                            {issue.category}
-                          </span>
                         </div>
-                        <h3 style={{ fontFamily: 'var(--font-ui)', fontSize: 17, fontWeight: 700, color: 'var(--text-primary)' }}>
+                        <h4 style={{ fontFamily: 'var(--heading)', fontSize: 16, fontWeight: 700, margin: 0 }}>
                           {issue.title}
-                        </h3>
+                        </h4>
                       </div>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <span style={{ fontSize: 12, color: 'var(--accent-text)', fontFamily: 'var(--font-mono)' }}>
-                        {isExpanded ? 'Hide Solution' : 'View Fix'}
-                      </span>
-                      {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                      {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                     </div>
                   </div>
 
-                  {/* Expanded Breakdown */}
                   {isExpanded && (
-                    <div style={{ marginTop: 24, paddingTop: 20, borderTop: '1px solid var(--border-muted)', display: 'flex', flexDirection: 'column', gap: 18 }}>
-                      {/* What it means */}
+                    <div
+                      style={{
+                        marginTop: 20,
+                        paddingTop: 18,
+                        borderTop: '1px solid var(--line)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 16
+                      }}
+                    >
                       <div>
-                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
-                          1. WHAT THE ERROR MEANS & SYMPTOM:
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: '#f59e0b', textTransform: 'uppercase' }}>
+                          OBSERVED SYMPTOM:
                         </span>
-                        <p style={{ color: 'var(--text-primary)', fontSize: 14, marginTop: 4 }}>
-                          {issue.symptom}
-                        </p>
+                        <div style={{ fontSize: 13, color: 'var(--text)', marginTop: 2 }}>{issue.symptom}</div>
                       </div>
 
-                      {/* Likely Cause */}
                       <div>
-                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
-                          2. LIKELY CAUSE:
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--muted)', textTransform: 'uppercase' }}>
+                          ROOT CAUSE:
                         </span>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginTop: 4 }}>
-                          {issue.rootCause}
-                        </p>
+                        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6, marginTop: 2 }}>{issue.rootCause}</div>
                       </div>
 
-                      {/* Verification */}
                       <div>
-                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
-                          3. HOW TO VERIFY:
+                        <span style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--accent)', textTransform: 'uppercase' }}>
+                          RESOLUTION CHECKLIST:
                         </span>
-                        <p style={{ color: 'var(--text-secondary)', fontSize: 14, marginTop: 4 }}>
-                          {issue.verification}
-                        </p>
-                      </div>
-
-                      {/* Step-by-Step Resolution */}
-                      <div>
-                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', color: 'var(--text-muted)' }}>
-                          4. STEP-BY-STEP RESOLUTION:
-                        </span>
-                        <div
-                          style={{
-                            marginTop: 8,
-                            padding: '16px 20px',
-                            borderRadius: 'var(--radius-md)',
-                            backgroundColor: 'var(--bg-surface)',
-                            border: '1px solid var(--border-muted)',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 10
-                          }}
-                        >
-                          {issue.solutionSteps.map((step, idx) => (
-                            <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: 10, fontSize: 13, color: 'var(--text-primary)' }}>
-                              <CheckCircle2 size={15} style={{ color: 'var(--accent-bright)', marginTop: 2, flexShrink: 0 }} />
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 6 }}>
+                          {issue.solutionSteps.map((step, i) => (
+                            <div key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 13, color: 'var(--text)' }}>
+                              <CheckCircle2 size={14} style={{ color: 'var(--accent)', marginTop: 2, flexShrink: 0 }} />
                               <span>{step}</span>
                             </div>
                           ))}
                         </div>
                       </div>
-
-                      {/* Return to guide button */}
-                      {issue.platform !== 'all' && (
-                        <div style={{ marginTop: 8 }}>
-                          <button
-                            onClick={() => navigate(`/install/${issue.platform}`)}
-                            className="btn btn-secondary btn-sm"
-                          >
-                            Return to {issue.platform.toUpperCase()} Installation Guide
-                            <ArrowRight size={14} />
-                          </button>
-                        </div>
-                      )}
                     </div>
                   )}
                 </div>
               );
-            })
-          )}
+            })}
+          </div>
         </div>
       </div>
     </div>
