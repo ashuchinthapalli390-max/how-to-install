@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-theme="crimson">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatXa 4.0 — Installation Atlas | One App. Five Worlds.</title>
+    <meta name="description" content="Cinematic step-by-step installation guides and verified releases for ChatXa 4.0 on Android, iPhone (iOS), Windows, macOS, and Linux." />
+    <meta name="theme-color" content="#08090B" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logos/ChatXa_01_Crimson_Noir_Right.png" />
+    
+    <!-- Google Fonts: Bodoni Moda, Space Grotesk, Manrope, IBM Plex Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Inline script to prevent theme flash -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('chatxa_theme');
+          if (saved === 'obsidian' || saved === 'ivory' || saved === 'crimson') {
+            document.documentElement.setAttribute('data-theme', saved);
+          } else {
+            document.documentElement.setAttribute('data-theme', 'crimson');
+          }
+        } catch(e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
