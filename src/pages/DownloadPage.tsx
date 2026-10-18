@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
-import { RELEASES_DATA } from '../data/downloads';
+import { RELEASES_DATA, OFFICIAL_GUIDES_DATA } from '../data/downloads';
 import { useRouter } from '../context/RouterContext';
 import type { PlatformId } from '../types';
-import { Download, Copy, Check, ShieldCheck, ArrowRight, Smartphone, Apple, Monitor, Laptop, Terminal } from 'lucide-react';
+import {
+  Download,
+  Copy,
+  Check,
+  ArrowRight,
+  Smartphone,
+  Apple,
+  Monitor,
+  Laptop,
+  Terminal,
+  FileText,
+  Package
+} from 'lucide-react';
 
 export const DownloadPage: React.FC = () => {
   const { navigate } = useRouter();
@@ -11,7 +23,7 @@ export const DownloadPage: React.FC = () => {
 
   const filteredReleases = filterPlatform === 'all'
     ? RELEASES_DATA
-    : RELEASES_DATA.filter((r) => r.platform === filterPlatform);
+    : RELEASES_DATA.filter((r) => r.platform === filterPlatform || (filterPlatform === 'all' && r.platform === 'all'));
 
   const handleCopySha = (sha: string) => {
     navigator.clipboard.writeText(sha);
@@ -19,50 +31,56 @@ export const DownloadPage: React.FC = () => {
     setTimeout(() => setCopiedHash(null), 2000);
   };
 
-  const getPlatformIcon = (platform: PlatformId) => {
+  const getPlatformIcon = (platform: PlatformId | 'all') => {
     switch (platform) {
       case 'android': return <Smartphone size={18} />;
       case 'ios': return <Apple size={18} />;
       case 'windows': return <Monitor size={18} />;
       case 'macos': return <Laptop size={18} />;
       case 'linux': return <Terminal size={18} />;
+      default: return <Package size={18} />;
     }
   };
 
   return (
     <div style={{ paddingTop: 'calc(var(--nav-height) + 40px)', paddingBottom: 100, minHeight: '90vh' }}>
-      <div className="container">
+      <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: 48 }}>
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-            <span className="badge badge-accent">
-              <ShieldCheck size={14} />
-              VERIFIED RELEASE ARTIFACTS
-            </span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-muted)' }}>
-              BUILD 4.0.0 (OFFICIAL)
-            </span>
+        <div style={{ textAlign: 'center' }}>
+          <div className="eyebrow" style={{ justifyContent: 'center', marginBottom: 12 }}>
+            <span className="live-dot" />
+            <span>VERIFIED APP STORE RELEASES & BINARIES</span>
           </div>
 
-          <h1 className="font-display" style={{ fontSize: 'clamp(36px, 4.8vw, 64px)', fontWeight: 700, marginBottom: 16 }}>
-            Download ChatXa 4.0
+          <h1
+            style={{
+              fontFamily: 'var(--heading)',
+              fontSize: 'clamp(36px, 4.8vw, 64px)',
+              fontWeight: 700,
+              letterSpacing: '-0.05em',
+              lineHeight: 1.1,
+              marginBottom: 16
+            }}
+          >
+            Download ChatXa 4.0 <br />
+            <em>Authentic Distribution Engine</em>
           </h1>
 
-          <p style={{ color: 'var(--text-secondary)', fontSize: 17, maxWidth: 650, margin: '0 auto', lineHeight: 1.6 }}>
-            Direct release binaries, verified SHA-256 signatures, and offline engine packages. Every build is cryptographically signed and ready for immediate deployment.
+          <p style={{ color: 'var(--muted)', fontSize: 16, maxWidth: 680, margin: '0 auto', lineHeight: 1.7 }}>
+            Direct release binaries synchronized directly from the local App Store repository. Every package has verified cryptographic SHA-256 signatures and high-speed HTTP downloads.
           </p>
         </div>
 
         {/* Filter Bar */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 40 }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <div
             style={{
               display: 'inline-flex',
               gap: 8,
               padding: '6px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: 'var(--bg-elevated)',
-              border: '1px solid var(--border-muted)',
+              borderRadius: 'var(--radius)',
+              backgroundColor: 'var(--surface)',
+              border: '1px solid var(--line)',
               overflowX: 'auto',
               maxWidth: '100%'
             }}
@@ -80,18 +98,15 @@ export const DownloadPage: React.FC = () => {
                 <button
                   key={f.id}
                   onClick={() => setFilterPlatform(f.id)}
+                  className="button secondary sm"
                   style={{
-                    padding: '8px 16px',
-                    borderRadius: 'var(--radius-full)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontFamily: 'var(--font-ui)',
-                    fontSize: 13,
-                    fontWeight: 600,
-                    backgroundColor: isActive ? 'var(--accent-bright)' : 'transparent',
-                    color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
-                    transition: 'all var(--transition-fast)',
-                    whiteSpace: 'nowrap'
+                    minHeight: 32,
+                    padding: '6px 16px',
+                    fontSize: 12,
+                    fontWeight: 650,
+                    borderColor: isActive ? 'var(--accent)' : 'transparent',
+                    color: isActive ? 'var(--accent)' : 'var(--muted)',
+                    backgroundColor: isActive ? 'var(--raised)' : 'transparent'
                   }}
                 >
                   {f.name}
@@ -109,23 +124,24 @@ export const DownloadPage: React.FC = () => {
               className="surface-card"
               style={{
                 padding: 32,
-                border: '1px solid var(--border-highlight)',
+                border: '1px solid var(--line)',
                 display: 'grid',
-                gridTemplateColumns: 'minmax(280px, 1.8fr) minmax(280px, 1.2fr)',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
                 gap: 32,
                 alignItems: 'center'
               }}
             >
               {/* Left Column: Artifact Details */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                   <div
                     style={{
-                      width: 32,
-                      height: 32,
-                      borderRadius: 8,
-                      backgroundColor: 'var(--accent-subtle)',
-                      color: 'var(--accent-bright)',
+                      width: 40,
+                      height: 40,
+                      borderRadius: 10,
+                      backgroundColor: 'var(--raised)',
+                      border: '1px solid var(--line)',
+                      color: 'var(--accent)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center'
@@ -134,11 +150,11 @@ export const DownloadPage: React.FC = () => {
                     {getPlatformIcon(release.platform)}
                   </div>
                   <div>
-                    <h3 style={{ fontFamily: 'var(--font-ui)', fontSize: 20, fontWeight: 700, color: 'var(--text-primary)' }}>
+                    <h3 style={{ fontFamily: 'var(--heading)', fontSize: 20, fontWeight: 700, margin: 0, color: 'var(--text)' }}>
                       {release.fileName}
                     </h3>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--accent-text)' }}>
-                      {release.platformName} • {release.architecture}
+                    <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--accent)' }}>
+                      {release.platformName} · {release.architecture}
                     </span>
                   </div>
                 </div>
@@ -149,35 +165,37 @@ export const DownloadPage: React.FC = () => {
                     gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))',
                     gap: 12,
                     padding: '12px 16px',
-                    borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'var(--bg-surface)',
-                    border: '1px solid var(--border-muted)'
+                    borderRadius: 'var(--radius)',
+                    backgroundColor: 'var(--raised)',
+                    border: '1px solid var(--line)'
                   }}
                 >
                   <div>
-                    <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>FILE SIZE</span>
-                    <div style={{ fontSize: 13, fontWeight: 600 }}>{release.fileSize}</div>
+                    <span style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>FILE SIZE</span>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{release.fileSize}</div>
                   </div>
                   <div>
-                    <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>VERSION</span>
-                    <div style={{ fontSize: 13, fontWeight: 600 }}>{release.version}</div>
+                    <span style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>VERSION</span>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{release.version}</div>
                   </div>
                   <div>
-                    <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>MINIMUM OS</span>
-                    <div style={{ fontSize: 13, fontWeight: 600 }}>{release.minOs}</div>
+                    <span style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>MINIMUM OS</span>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text)' }}>{release.minOs}</div>
                   </div>
                   <div>
-                    <span style={{ fontSize: 10, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>RELEASE DATE</span>
-                    <div style={{ fontSize: 13, fontWeight: 600 }}>{release.releaseDate}</div>
+                    <span style={{ fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>STATUS</span>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--accent)' }}>
+                      {release.status === 'verified' ? 'Verified Official' : 'Build Target'}
+                    </div>
                   </div>
                 </div>
 
                 {/* Release Notes */}
                 <div>
-                  <span style={{ fontFamily: 'var(--font-ui)', fontSize: 12, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--text-muted)', display: 'block', marginBottom: 6 }}>
-                    Package Notes & Inclusions:
+                  <span style={{ fontFamily: 'var(--heading)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', display: 'block', marginBottom: 6 }}>
+                    Package Notes & Capabilities:
                   </span>
-                  <ul style={{ paddingLeft: 18, color: 'var(--text-secondary)', fontSize: 13, lineHeight: 1.6 }}>
+                  <ul style={{ paddingLeft: 18, color: 'var(--muted)', fontSize: 13, lineHeight: 1.6, margin: 0 }}>
                     {release.releaseNotes.map((note, idx) => (
                       <li key={idx} style={{ marginBottom: 4 }}>{note}</li>
                     ))}
@@ -191,24 +209,24 @@ export const DownloadPage: React.FC = () => {
                 <div
                   style={{
                     padding: 16,
-                    borderRadius: 'var(--radius-md)',
-                    backgroundColor: 'var(--bg-surface)',
-                    border: '1px solid var(--border-muted)'
+                    borderRadius: 'var(--radius)',
+                    backgroundColor: 'var(--raised)',
+                    border: '1px solid var(--line)'
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
-                      SHA-256 CHECKSUM
+                    <span style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--muted)' }}>
+                      SHA-256 VERIFIED CHECKSUM
                     </span>
                     <button
                       onClick={() => handleCopySha(release.sha256)}
                       style={{
                         background: 'none',
                         border: 'none',
-                        color: copiedHash === release.sha256 ? 'var(--success-color)' : 'var(--accent-text)',
+                        color: copiedHash === release.sha256 ? 'var(--accent)' : 'var(--muted)',
                         cursor: 'pointer',
                         fontSize: 11,
-                        fontFamily: 'var(--font-mono)',
+                        fontFamily: 'var(--mono)',
                         display: 'flex',
                         alignItems: 'center',
                         gap: 4
@@ -218,53 +236,117 @@ export const DownloadPage: React.FC = () => {
                       {copiedHash === release.sha256 ? 'Copied' : 'Copy Hash'}
                     </button>
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: '#A6ACCD', wordBreak: 'break-all', lineHeight: 1.4 }}>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: 11, color: 'var(--accent)', wordBreak: 'break-all', lineHeight: 1.5 }}>
                     {release.sha256}
                   </div>
                 </div>
 
                 {/* Local verified repository path */}
                 {release.directFilePath && (
-                  <div style={{ padding: '8px 12px', borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--bg-surface)', fontSize: 11, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
-                    📂 Build Location: <span style={{ color: 'var(--text-secondary)' }}>{release.directFilePath}</span>
+                  <div style={{ padding: '8px 12px', borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--raised)', fontSize: 11, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>
+                    📂 Master Source: <span style={{ color: 'var(--text)' }}>{release.directFilePath}</span>
                   </div>
                 )}
 
-                {/* Buttons */}
+                {/* Action Buttons */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   {release.downloadUrl ? (
                     <a
                       href={release.downloadUrl}
                       download={release.fileName}
-                      className="btn btn-primary btn-lg"
-                      style={{ width: '100%', textDecoration: 'none' }}
+                      className="button"
+                      style={{ width: '100%', textDecoration: 'none', justifyContent: 'center' }}
                     >
-                      <Download size={18} />
-                      Download {release.fileName}
+                      <Download size={16} />
+                      <span>Download {release.fileName} ({release.fileSize})</span>
                     </a>
                   ) : (
                     <button
                       onClick={() => navigate(`/install/${release.platform}`)}
-                      className="btn btn-primary btn-lg"
-                      style={{ width: '100%' }}
+                      className="button"
+                      style={{ width: '100%', justifyContent: 'center' }}
                     >
-                      <Download size={18} />
-                      View Build Instructions
+                      <Download size={16} />
+                      <span>View Build Instructions</span>
                     </button>
                   )}
 
                   <button
-                    onClick={() => navigate(`/install/${release.platform}`)}
-                    className="btn btn-secondary"
-                    style={{ width: '100%' }}
+                    onClick={() => navigate(release.platform === 'all' ? '/install/android' : `/install/${release.platform}`)}
+                    className="button secondary"
+                    style={{ width: '100%', justifyContent: 'center' }}
                   >
-                    View {release.platformName} Step-by-Step Guide
-                    <ArrowRight size={16} />
+                    <span>View {release.platformName} Walkthrough Guide</span>
+                    <ArrowRight size={14} />
                   </button>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Section: Official Platform Installation Text Guides */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <div className="eyebrow" style={{ marginBottom: 4 }}>OFFICIAL DOCUMENTATION FILES</div>
+              <h3 style={{ fontFamily: 'var(--heading)', fontSize: 24, fontWeight: 700, margin: 0 }}>
+                Platform Installation Manuals (.txt)
+              </h3>
+            </div>
+            <span style={{ fontSize: 12, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>
+              From App Store Directory
+            </span>
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: 16
+            }}
+          >
+            {OFFICIAL_GUIDES_DATA.map((guide) => (
+              <div
+                key={guide.id}
+                className="surface-card"
+                style={{
+                  padding: 20,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  gap: 16
+                }}
+              >
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                    <FileText size={16} style={{ color: 'var(--accent)' }} />
+                    <span className="badge" style={{ fontSize: 9 }}>{guide.platform}</span>
+                    <span style={{ marginLeft: 'auto', fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--muted)' }}>
+                      {guide.fileSize}
+                    </span>
+                  </div>
+
+                  <h4 style={{ fontFamily: 'var(--heading)', fontSize: 15, fontWeight: 700, margin: '0 0 6px 0', color: 'var(--text)' }}>
+                    {guide.title}
+                  </h4>
+                  <p style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.5, margin: 0 }}>
+                    {guide.description}
+                  </p>
+                </div>
+
+                <a
+                  href={guide.downloadUrl}
+                  download={guide.fileName}
+                  className="button secondary sm"
+                  style={{ textDecoration: 'none', justifyContent: 'center', width: '100%', gap: 6 }}
+                >
+                  <Download size={12} />
+                  <span>Download {guide.fileName}</span>
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -26,5 +26,9 @@ dist-ssr
 # Large distribution binaries (>100MB exceeds GitHub hard limit)
 public/downloads/*.apk
 public/downloads/*.ipa
+public/downloads/*.zip
+App Store/
+app_store/
 *.apk
 *.ipa
+*.zip

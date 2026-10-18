@@ -152,7 +152,7 @@ export const HomePage: React.FC = () => {
                 <div style={{ color: 'var(--muted)', marginBottom: 4 }}>FILE SIZE & CHECKSUM</div>
                 <div style={{ color: 'var(--text)', fontWeight: 600 }}>549.7 MB (Direct Download)</div>
                 <div
-                  onClick={() => handleCopyHash('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'apk')}
+                  onClick={() => handleCopyHash('92637def761092a58373fd26ae9d4bfdeab391bdabf9198b96d138bd2af1fb05', 'apk')}
                   style={{
                     color: 'var(--accent)',
                     cursor: 'pointer',
@@ -164,7 +164,7 @@ export const HomePage: React.FC = () => {
                   }}
                 >
                   {copiedHash === 'apk' ? <Check size={11} /> : <Copy size={11} />}
-                  <span>{copiedHash === 'apk' ? 'Checksum Copied' : 'SHA-256: e3b0c442...b855'}</span>
+                  <span>{copiedHash === 'apk' ? 'Checksum Copied' : 'SHA-256: 92637def...fb05'}</span>
                 </div>
               </div>
             </div>
@@ -223,7 +223,7 @@ export const HomePage: React.FC = () => {
                 <div style={{ color: 'var(--muted)', marginBottom: 4 }}>FILE SIZE & CHECKSUM</div>
                 <div style={{ color: 'var(--text)', fontWeight: 600 }}>47.8 MB (Direct Download)</div>
                 <div
-                  onClick={() => handleCopyHash('a8f5c9e2b4d1a738495061728394a5b6c7d8e9f0123456789abcdef012345678', 'ipa')}
+                  onClick={() => handleCopyHash('4b9bc55c535381be022bd3540c09f1b4a4eda375dd8e5ab2bdec6812b9e51362', 'ipa')}
                   style={{
                     color: 'var(--accent)',
                     cursor: 'pointer',
@@ -235,7 +235,7 @@ export const HomePage: React.FC = () => {
                   }}
                 >
                   {copiedHash === 'ipa' ? <Check size={11} /> : <Copy size={11} />}
-                  <span>{copiedHash === 'ipa' ? 'Checksum Copied' : 'SHA-256: a8f5c9e2...5678'}</span>
+                  <span>{copiedHash === 'ipa' ? 'Checksum Copied' : 'SHA-256: 4b9bc55c...1362'}</span>
                 </div>
               </div>
             </div>

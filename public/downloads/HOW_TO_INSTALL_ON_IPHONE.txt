@@ -1,0 +1,232 @@
+================================================================================
+          CHATXA 4.0 — COMPLETE IPHONE (iOS) INSTALLATION MASTER GUIDE
+================================================================================
+Target App: ChatXa 4.0 (iOS Release Build)
+File Name:  ChatXa-iOS-Release.ipa
+File Path:  c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-iOS-Release.ipa
+Size:       ~47.8 MB
+Compatible: iPhone (iOS 13.0, iOS 14, 15, 16, 17, 18 and newer)
+================================================================================
+
+TABLE OF CONTENTS:
+--------------------------------------------------------------------------------
+1. Why iPhone Shows "Unsupported File Type" (Important Explanation)
+2. Quick Method Summary — Which Method Should You Use?
+3. METHOD 1: Direct On iPhone via InstallOnAir (No Computer — 1 Minute)
+4. METHOD 2: Direct On iPhone via Scarlet (No Computer On-Device Sideload)
+5. METHOD 3: Windows PC via Sideloadly (100% Guaranteed Success — Free Apple ID)
+6. METHOD 4: Windows PC via 3uTools (Simple 1-Click Sideloading)
+7. METHOD 5: Official Apple TestFlight (Best for Sharing with Multiple Testers)
+8. CRITICAL IPHONE SETTINGS (Developer Mode & Trust Certificate)
+9. FREQUENTLY ASKED QUESTIONS & TROUBLESHOOTING
+================================================================================
+
+
+================================================================================
+1. WHY DOES IPHONE SHOW "UNSUPPORTED FILE TYPE"?
+================================================================================
+If you sent "ChatXa-iOS-Release.ipa" over WhatsApp, Telegram, Google Drive, 
+or email and tapped it on your iPhone, iOS displays:
+  "Unsupported file type" or opens a blank white screen.
+
+WHY THIS HAPPENS:
+- Unlike Android (where you can directly tap an .apk file to install it), Apple's
+  iOS operating system blocks direct execution of .ipa files for security.
+- iOS treats .ipa files as raw compressed ZIP archives.
+- To install an .ipa on iPhone, iOS requires an installation manifest or a 
+  signing certificate profile.
+- You CANNOT install by just tapping the raw .ipa inside WhatsApp or Files app.
+- Instead, use any of the simple, proven methods explained below!
+
+
+================================================================================
+2. QUICK METHOD SUMMARY — WHICH ONE SHOULD YOU CHOOSE?
+================================================================================
+• Want to install directly on iPhone in 60 seconds with NO PC?
+  ---> Use METHOD 1 (InstallOnAir) or METHOD 2 (Scarlet).
+
+• Have a Windows PC and a USB cable (Most reliable, works 100%)?
+  ---> Use METHOD 3 (Sideloadly) or METHOD 4 (3uTools).
+
+• Want to send to clients/friends anywhere in the world with 1 link?
+  ---> Use METHOD 5 (Apple TestFlight).
+
+
+================================================================================
+3. METHOD 1: DIRECT ON IPHONE VIA INSTALLONAIR (NO PC NEEDED)
+================================================================================
+InstallOnAir creates a temporary Over-The-Air (OTA) wireless install link
+recognized directly by Apple Safari.
+
+STEP-BY-STEP:
+1. On your iPhone, open the "Safari" web browser (must use Safari, not Chrome).
+2. Go to: https://www.installonair.com
+3. Tap the "Choose File" or "Upload IPA" button.
+4. Select "ChatXa-iOS-Release.ipa" (from your iPhone Files, Downloads, or iCloud Drive).
+5. Tap the green "Submit" button.
+6. Wait 30 seconds for upload to complete.
+7. A page will appear with a green button: "Install App".
+8. Tap "Install App".
+9. An iPhone system popup will appear:
+     "installonair.com would like to install 'ChatXa'"
+10. Tap "Install".
+11. Return to your iPhone Home Screen. You will see the ChatXa app downloading 
+    and installing with a circular progress icon!
+12. Once installed, follow SECTION 8 below ("Trust Certificate") to open it.
+
+*Note: You can also do the upload on your PC browser at installonair.com, 
+ scan the generated QR code with your iPhone Camera, and tap the link to install!
+
+
+================================================================================
+4. METHOD 2: DIRECT ON IPHONE VIA SCARLET (NO PC NEEDED)
+================================================================================
+Scarlet is a popular on-device sideloading manager for iOS that signs and 
+installs .ipa files straight from your iPhone.
+
+STEP-BY-STEP:
+1. On your iPhone, open Safari and navigate to: https://usescarlet.com
+2. Scroll to the bottom and tap "Install".
+3. Choose "Direct Install" from the options.
+4. Wait 10 seconds for the countdown, then tap "Open in iTunes" / "Install".
+5. The Scarlet app icon will appear on your iPhone Home Screen.
+6. Go to iPhone Settings -> General -> VPN & Device Management -> Trust Scarlet.
+7. Open the Scarlet app on your iPhone.
+8. In Scarlet, tap the "Import" button (icon with a tray and arrow pointing down,
+   located in the top-right corner).
+9. Select "ChatXa-iOS-Release.ipa" from your iPhone Files.
+10. Scarlet will sign the app and display an install prompt: Tap "Install".
+11. ChatXa is now installed on your Home Screen!
+
+
+================================================================================
+5. METHOD 3: WINDOWS PC VIA SIDELOADLY (100% RELIABLE — RECOMMENDED)
+================================================================================
+This is the most dependable method worldwide. It uses your personal free Apple ID 
+(no paid $99 developer account needed) and connects via your Windows computer.
+
+STEP-BY-STEP:
+1. Download Sideloadly on your Windows PC:
+   Official Website: https://sideloadly.io
+2. Run the Sideloadly installer. (If prompted to install iTunes/iCloud for Windows,
+   let Sideloadly install them).
+3. Connect your iPhone to your Windows PC using a Lightning or USB-C cable.
+4. Unlock your iPhone screen. If a prompt appears asking "Trust This Computer?", 
+   tap "Trust" and enter your iPhone passcode.
+5. Launch Sideloadly on your PC:
+   - Check the "Connected Device" dropdown: Your iPhone name will show up.
+   - Click the big "IPA" icon or drag and drop "ChatXa-iOS-Release.ipa" into Sideloadly.
+   - In the "Apple ID" box, type your regular Apple ID email (e.g. yourname@icloud.com or yourname@gmail.com).
+   - Click "Start".
+6. Sideloadly will ask for your Apple ID password:
+   (This is securely sent directly to Apple's authentication servers to generate 
+   a personal free 7-day development certificate).
+   - If you have 2-Factor Authentication enabled on your iPhone, enter the 6-digit 
+     verification code that pops up on your iPhone screen.
+7. Watch the Sideloadly log:
+   - "Signing..."
+   - "Connecting to device..."
+   - "Installing..."
+   - "Done!"
+8. The ChatXa app icon will now appear on your iPhone home screen!
+9. Complete SECTION 8 below to open the app.
+
+
+================================================================================
+6. METHOD 4: WINDOWS PC VIA 3uTOOLS (SIMPLE 1-CLICK SIDELOAD)
+================================================================================
+3uTools is a free all-in-one iOS utility tool for Windows.
+
+STEP-BY-STEP:
+1. Download and install 3uTools on your Windows PC from: http://www.3u.com
+2. Connect your iPhone to PC via USB cable and unlock your iPhone screen.
+3. Open 3uTools -> Click "Toolbox" in the top navigation bar.
+4. Click "IPA Signature".
+5. Click "Add IPA Files" and select "ChatXa-iOS-Release.ipa".
+6. Select "Sign with Apple ID", click "Add Apple ID", and enter your Apple ID.
+7. Check the box next to ChatXa and click "Start Signing".
+8. Once signing shows "Signature Succeeded", click "Open the IPA directory".
+9. In 3uTools, go to "Apps" on the left menu -> Click "Import & Install IPA".
+10. Select the signed IPA. 3uTools will install ChatXa on your iPhone in 30 seconds!
+
+
+================================================================================
+7. METHOD 5: OFFICIAL APPLE TESTFLIGHT (FOR MULTIPLE TESTERS GLOBALLY)
+================================================================================
+If you have an Apple Developer Account ($99/year), this is the official Apple way:
+
+1. Upload the build to App Store Connect / TestFlight (using the automated 
+   GitHub Actions workflow in your repo: .github/workflows/ios_build.yml,
+   or via Transporter app / Xcode).
+2. Go to https://appstoreconnect.apple.com -> Apps -> ChatXa -> TestFlight.
+3. Under "Public Link", generate a public invite URL.
+4. Send the link to any iPhone user.
+5. The user downloads the free "TestFlight" app from the App Store and taps your link.
+6. Tap "Install". The app installs just like any official App Store app!
+
+
+================================================================================
+8. CRITICAL IPHONE SETTINGS (MUST DO AFTER INSTALLING!)
+================================================================================
+After installing via Sideloadly, InstallOnAir, Scarlet, or 3uTools, you must 
+grant iOS permission before opening ChatXa for the first time:
+
+STEP 1: TRUST THE DEVELOPER CERTIFICATE
+---------------------------------------
+1. On your iPhone, open the "Settings" app.
+2. Tap "General".
+3. Scroll down and tap "VPN & Device Management" (or "Profiles & Device Management").
+4. Under "Developer App" or "Enterprise App", you will see your Apple ID email 
+   or the signing profile name. Tap on it.
+5. Tap "Trust [Name / Email]".
+6. A confirmation dialog will appear -> Tap "Trust".
+
+STEP 2: ENABLE DEVELOPER MODE (REQUIRED ON iOS 16, 17, 18+)
+----------------------------------------------------------
+If your iPhone is running iOS 16, 17, or 18+, Apple requires Developer Mode to be ON:
+1. Open iPhone "Settings".
+2. Scroll down and tap "Privacy & Security".
+3. Scroll all the way to the bottom and tap "Developer Mode".
+4. Toggle "Developer Mode" to ON.
+5. A prompt will ask to restart your iPhone. Tap "Restart".
+6. After your iPhone reboots, unlock the screen.
+7. A popup will say: "Turn on Developer Mode?". Tap "Turn On" and enter your passcode.
+
+YOU ARE ALL SET! You can now tap ChatXa on your iPhone home screen and use the app!
+
+
+================================================================================
+9. FREQUENTLY ASKED QUESTIONS & TROUBLESHOOTING
+================================================================================
+
+Q1: What about Android users?
+A1: Android is 100% plug-and-play. Android users can install:
+    "ChatXa-Android-Release.apk" (in c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\)
+    directly with 1 tap from WhatsApp, Telegram, or Google Drive.
+
+Q2: "Unable to Install ChatXa — This app cannot be installed because its integrity could not be verified"?
+A2: This occurs when an over-the-air enterprise certificate expires. 
+    Fix: Use METHOD 3 (Sideloadly) with your own Apple ID, which creates a fresh,
+    authentic Apple certificate that is 100% guaranteed to verify.
+
+Q3: Is entering Apple ID into Sideloadly safe?
+A3: Yes! Sideloadly communicates directly with Apple's official server (gsa.apple.com)
+    over encrypted SSL to request a free personal developer signing certificate.
+    You can also use a secondary free Apple ID if you prefer.
+
+Q4: How long does the sideloaded app stay active?
+A4: Free Apple ID personal certificates remain valid for 7 days. If the 7 days
+    expire, simply re-plug your iPhone and click "Start" in Sideloadly again.
+    (If installed via TestFlight or an Apple Developer Account, it lasts 90 to 365 days).
+
+Q5: App crashes immediately on launch?
+A5: Make sure Developer Mode is toggled ON in:
+    iPhone Settings -> Privacy & Security -> Developer Mode.
+
+================================================================================
+Summary of File Locations on Your Computer:
+================================================================================
+iOS App File:     c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-iOS-Release.ipa
+Android App File: c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
+Guide File:       c:\Users\ashuc\OneDrive\Desktop\HOW_TO_INSTALL_ON_IPHONE.txt
+================================================================================

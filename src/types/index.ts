@@ -57,7 +57,7 @@ export interface PlatformInfo {
 
 export interface ReleaseArtifact {
   id: string;
-  platform: PlatformId;
+  platform: PlatformId | 'all';
   platformName: string;
   version: string;
   fileName: string;

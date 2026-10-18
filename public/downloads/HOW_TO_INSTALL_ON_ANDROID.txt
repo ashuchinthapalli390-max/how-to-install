@@ -1,0 +1,178 @@
+================================================================================
+          CHATXA 4.0 — COMPLETE ANDROID INSTALLATION MASTER GUIDE
+================================================================================
+Target App: ChatXa 4.0 (Android Release Build)
+File Name:  ChatXa-Android-Release.apk
+File Path:  c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
+Size:       ~549.7 MB (Includes complete offline Flutter engine + WebRTC calling libraries)
+Compatible: Android 8.0 (Oreo), 9 (Pie), 10, 11, 12, 13, 14, 15 and newer
+Brands:     Samsung, Vivo, iQOO, Xiaomi, Redmi, POCO, OnePlus, Realme, Oppo,
+            Motorola, Google Pixel, Nothing Phone, Techno, Infinix, etc.
+================================================================================
+
+TABLE OF CONTENTS:
+--------------------------------------------------------------------------------
+1. Android Installation Overview (Why Android is Easy)
+2. METHOD 1: Direct 1-Tap Install from WhatsApp, Telegram, or Google Drive
+3. METHOD 2: Direct Install from Phone Storage / File Manager (USB Cable)
+4. METHOD 3: USB ADB Install from Windows PC (Fastest for Developers / Testers)
+5. BRAND-SPECIFIC SETTINGS (Vivo, Samsung, Xiaomi, OnePlus, Pixel)
+6. BYPASSING GOOGLE PLAY PROTECT WARNING (Normal for Non-Store APKs)
+7. HOW TO UPDATE CHATXA WITHOUT LOSING DATA
+8. TROUBLESHOOTING & FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+
+================================================================================
+1. ANDROID INSTALLATION OVERVIEW
+================================================================================
+Unlike Apple iOS, Android allows direct sideloading of applications (.apk files)
+with zero fees, no jailbreak, and no computer required!
+
+The only requirement is enabling the standard "Install Unknown Apps" permission 
+for whichever app (WhatsApp, Chrome, or File Manager) is opening the .apk file.
+
+
+================================================================================
+2. METHOD 1: DIRECT 1-TAP INSTALL FROM WHATSAPP / TELEGRAM / DRIVE
+================================================================================
+This is the fastest method to share with friends, colleagues, or testers.
+
+STEP-BY-STEP:
+1. Send "ChatXa-Android-Release.apk" to your phone via WhatsApp, Telegram, or 
+   upload it to your Google Drive.
+2. On your phone, tap the received "ChatXa-Android-Release.apk" file.
+3. If this is your first time installing an APK from that app, Android will show:
+     "For your security, your phone is not allowed to install unknown apps from this source."
+4. Tap "Settings" on that popup.
+5. Toggle ON "Allow from this source" (or "Allow app installs").
+6. Tap the Back button.
+7. Tap "Install".
+8. In a few seconds, the screen will say "App Installed".
+9. Tap "Open" to launch ChatXa!
+
+
+================================================================================
+3. METHOD 2: TRANSFERRING VIA USB CABLE FROM PC TO PHONE
+================================================================================
+If you want to transfer the APK file directly from your computer:
+
+STEP-BY-STEP:
+1. Connect your Android phone to your PC with a USB cable.
+2. On your phone screen, swipe down the notification bar, tap "Charging this device via USB", 
+   and change the option to "File Transfer" / "Transferring files (MTP)".
+3. On your Windows PC, open "File Explorer" (Windows Key + E) and go to "This PC".
+4. Open your phone's internal storage and open the "Download" folder.
+5. Copy "ChatXa-Android-Release.apk" from:
+   c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
+   and paste it into your phone's "Download" folder.
+6. Disconnect or leave connected.
+7. On your phone, open your built-in "Files" or "File Manager" app.
+8. Go to "Downloads" or "APKs" category.
+9. Tap "ChatXa-Android-Release.apk".
+10. Tap "Install" (allow "Install unknown apps" if prompted).
+11. Tap "Open"!
+
+
+================================================================================
+4. METHOD 3: USB ADB INSTALL FROM WINDOWS PC (DIRECT TO PHONE)
+================================================================================
+If your phone is connected to your Windows PC with USB Debugging enabled,
+you can install the APK with a single command without touching file managers!
+
+STEP-BY-STEP:
+1. Enable USB Debugging on your phone:
+   - Go to Settings -> About Phone -> tap "Build Number" 7 times (Enables Developer options).
+   - Go to Settings -> System -> Developer Options (or Additional Settings).
+   - Turn ON "USB Debugging".
+   - (Crucial for Vivo/Xiaomi/iQOO): Also turn ON "Install via USB"!
+2. Connect your phone to your PC via USB cable.
+3. Unlock the phone screen. A popup will ask: "Allow USB debugging?". 
+   Check "Always allow from this computer" and tap "Allow".
+4. Open PowerShell or Command Prompt on your PC.
+5. Run this command:
+   adb install -r "c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk"
+6. The terminal will stream the APK and print "Success".
+7. ChatXa is instantly installed on your phone!
+
+
+================================================================================
+5. BRAND-SPECIFIC SETTINGS (IMPORTANT!)
+================================================================================
+Different phone manufacturers have custom security layers:
+
+A. VIVO / iQOO (Funtouch OS / OriginOS):
+   - To install via ADB: You MUST go to Settings -> Developer Options -> Turn ON "Install via USB".
+   - When installing, a prompt with a 5-second countdown will appear: tap "Continue".
+   - If Vivo Security prompts: Tap "Continue with Install".
+
+B. SAMSUNG (One UI):
+   - Go to Settings -> Apps -> Tap three dots (top right) -> Special access -> 
+     "Install unknown apps" -> Turn ON for "My Files" and "Chrome".
+   - If "Auto Blocker" is ON (One UI 6.0+): Go to Settings -> Security and privacy -> 
+     Auto Blocker -> Temporarily toggle OFF to install sideloaded APKs.
+
+C. XIAOMI / REDMI / POCO (MIUI / HyperOS):
+   - When installing, MIUI Security Scan runs. Tap the Gear icon in top right and turn off 
+     "Scan apps from third-party sources" if it delays.
+   - For USB ADB install: In Developer Options, enable both "USB Debugging" AND 
+     "Install via USB", plus "USB Debugging (Security settings)" (requires Mi Account login).
+
+D. ONEPLUS / OPPO / REALME (ColorOS / OxygenOS):
+   - Settings -> Apps -> Special app access -> Install unknown apps -> Enable.
+   - If "Private Safe" warns you, tap "Install Anyway".
+
+E. GOOGLE PIXEL / MOTOROLA / NOTHING (Stock Android):
+   - Seamless installation: Tap "Settings" on the prompt -> Toggle "Allow from this source" -> Tap "Install".
+
+
+================================================================================
+6. BYPASSING GOOGLE PLAY PROTECT WARNING
+================================================================================
+Because ChatXa is an in-development release not yet published on Google Play Store,
+Google Play Protect may display a warning dialog:
+
+  "Blocked by Play Protect" or "Unrecognized app"
+
+HOW TO BYPASS IT:
+1. Do NOT tap "OK" or "Uninstall".
+2. Tap "More details" (small dropdown arrow).
+3. Tap "Install anyway" (or "Install anyway (unsafe)").
+4. The installation will proceed immediately!
+
+*Note: Why does Google show this? Google displays this prompt for ANY newly built .apk 
+worldwide that has not yet been registered in Google's cloud database. The app is 100% safe.
+
+
+================================================================================
+7. HOW TO UPDATE CHATXA WITHOUT LOSING DATA
+================================================================================
+- When a new version of `ChatXa-Android-Release.apk` is released, you DO NOT need 
+  to uninstall the previous version!
+- Simply tap the new APK and tap "Update".
+- All your login sessions, cached media, Supabase credentials, and chat settings 
+  will be preserved intact.
+
+
+================================================================================
+8. TROUBLESHOOTING & FAQS
+================================================================================
+
+Q1: "App not installed" or "App not compatible with your device"?
+A1: Common causes:
+    - You have an older test version installed with a mismatched signature. 
+      Fix: Uninstall the old ChatXa app first, then tap Install on the new APK.
+    - Not enough storage space. Fix: Ensure you have at least 1 GB free space.
+
+Q2: "There was a problem parsing the package" (Parse Error)?
+A2: The APK download was incomplete or interrupted.
+    Fix: Delete the partial APK file and download/copy the full 549.7 MB file again.
+
+Q3: Does ChatXa support LiveKit calling and Camera on Android?
+A3: Yes! When you first open ChatXa, make sure to tap "While using the app" 
+    when Android asks for Camera, Microphone, and Location permissions.
+
+================================================================================
+Summary of Android File Location:
+c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
+================================================================================

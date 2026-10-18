@@ -1,0 +1,166 @@
+================================================================================
+          CHATXA 4.0 — COMPLETE LINUX INSTALLATION MASTER GUIDE
+================================================================================
+Target App: ChatXa 4.0 (Linux x86_64 / ARM64)
+Distributions: Ubuntu, Debian, Linux Mint, Fedora, Arch Linux, Manjaro, Pop!_OS,
+               openSUSE, elementary OS, Zorin OS, etc.
+================================================================================
+
+TABLE OF CONTENTS:
+--------------------------------------------------------------------------------
+1. Linux Options Overview (Native Desktop App vs Waydroid Android Container)
+2. METHOD 1: Native Linux Desktop Application (GTK3 Release Build)
+3. METHOD 2: Run Android APK via Waydroid (Near-Native Speed on Wayland)
+4. CREATING A LINUX DESKTOP SHORTCUT & APP LAUNCHER (.desktop File)
+5. SYSTEM PREREQUISITES & REQUIRED LIBRARIES FOR ALL DISTROS
+6. AUDIO & WEBCAM HARDWARE ACCESS (PipeWire & PulseAudio)
+7. TROUBLESHOOTING & FREQUENTLY ASKED QUESTIONS
+================================================================================
+
+
+================================================================================
+1. LINUX OPTIONS OVERVIEW
+================================================================================
+Linux users can run ChatXa in two high-performance ways:
+
+OPTION A (NATIVE LINUX DESKTOP APP):
+- ChatXa is compiled into a native 64-bit Linux binary using Flutter's GTK3 engine.
+- Zero virtualization overhead, fast startup, native GTK theme integration, 
+  and direct PipeWire / PulseAudio sound and webcam support.
+
+OPTION B (WAYDROID / ANBOX — RUNNING ANDROID APK ON LINUX):
+- If you already have `ChatXa-Android-Release.apk` (549.7 MB), you can run it 
+  on modern Linux using "Waydroid".
+- Waydroid uses Linux kernel namespaces (LXC) to run Android apps with direct 
+  access to your GPU hardware at near-native framerates!
+
+
+================================================================================
+2. METHOD 1: NATIVE LINUX DESKTOP APPLICATION (GTK3 BUILD)
+================================================================================
+To build and run ChatXa as a native desktop binary on Linux:
+
+STEP 1: INSTALL BUILD PREREQUISITES (Run in Terminal):
+- For Ubuntu / Debian / Linux Mint / Pop!_OS:
+  sudo apt update
+  sudo apt install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev
+
+- For Fedora / RHEL:
+  sudo dnf install clang cmake ninja-build pkgconf-pkg-config gtk3-devel xz-devel
+
+- For Arch Linux / Manjaro:
+  sudo pacman -S clang cmake ninja pkgconf gtk3 xz
+
+STEP 2: COMPILE THE RELEASE BUNDLE:
+1. Open Terminal in your ChatXa directory:
+   cd /path/to/ChatXa
+2. If the `linux/` folder is not yet generated, initialize it once:
+   flutter create --platforms=linux .
+3. Run the release build command:
+   flutter build linux --release
+
+STEP 3: RUN THE APPLICATION:
+1. Navigate to the compiled release directory:
+   cd build/linux/x64/release/bundle/
+2. Grant executable permissions if needed:
+   chmod +x chatxa
+3. Run ChatXa:
+   ./chatxa
+4. ChatXa will launch instantly as a responsive desktop window!
+
+
+================================================================================
+3. METHOD 2: RUN ANDROID APK VIA WAYDROID (NO COMPILING NEEDED)
+================================================================================
+If your Linux system runs Wayland (default on Ubuntu 22.04+, Fedora 36+, Debian 12+),
+Waydroid is by far the cleanest way to run the release APK directly.
+
+STEP-BY-STEP:
+1. Install Waydroid on your Linux distribution:
+   - Ubuntu / Debian:
+     sudo apt install curl ca-certificates -y
+     curl -s https://repo.waydro.id | sudo bash
+     sudo apt install waydroid -y
+   - Fedora:
+     sudo dnf copr enable alefc/waydroid
+     sudo dnf install waydroid
+   - Arch Linux:
+     sudo pacman -S waydroid
+
+2. Initialize Waydroid:
+   sudo waydroid init
+
+3. Start the Waydroid container service:
+   sudo systemctl start waydroid-container
+   waydroid session start &
+
+4. Install the ChatXa APK:
+   waydroid app install "ChatXa-Android-Release.apk"
+
+5. Launch ChatXa:
+   - ChatXa will now appear directly in your Ubuntu / GNOME / KDE Application Menu!
+   - You can also launch it via terminal:
+     waydroid app launch com.example.chatxa
+
+
+================================================================================
+4. CREATING A LINUX DESKTOP LAUNCHER (.DESKTOP FILE)
+================================================================================
+To make ChatXa appear in your Linux Application Menu and dock with an icon:
+
+1. Open Terminal and create a `.desktop` file:
+   nano ~/.local/share/applications/chatxa.desktop
+
+2. Paste the following configuration (replace `/path/to/ChatXa` with your actual path):
+   [Desktop Entry]
+   Version=1.0
+   Type=Application
+   Name=ChatXa
+   Comment=ChatXa — Every Moment Connects (Social & Realtime Chat)
+   Exec=/path/to/ChatXa/build/linux/x64/release/bundle/chatxa
+   Icon=/path/to/ChatXa/assets/logos/chatxa_logo.png
+   Terminal=false
+   Categories=Network;InstantMessaging;Chat;
+   Keywords=chat;social;messaging;calls;
+
+3. Save the file (Ctrl + O, Enter, then Ctrl + X).
+4. Update the desktop database:
+   update-desktop-database ~/.local/share/applications/
+5. ChatXa is now in your Linux App Drawer and can be pinned to your Favorites Dock!
+
+
+================================================================================
+5. AUDIO & WEBCAM HARDWARE ACCESS (PIPEWIRE & PULSEAUDIO)
+================================================================================
+ChatXa's LiveKit calling engine connects to standard Linux audio and video drivers:
+1. Audio: Fully compatible with PipeWire (`pipewire-pulse`) and PulseAudio.
+2. Microphone: Ensure your user is in the `audio` group:
+   sudo usermod -aG audio $USER
+3. Webcam: Ensure your user is in the `video` group:
+   sudo usermod -aG video $USER
+4. (Log out and log back in if you just added groups).
+
+
+================================================================================
+6. TROUBLESHOOTING & FAQS
+================================================================================
+
+Q1: "Gtk-WARNING: cannot open display"?
+A1: If running over SSH or from a background service, ensure `DISPLAY` is exported:
+    export DISPLAY=:0
+    ./chatxa
+
+Q2: Missing libgtk-3.so.0 or liblzma.so.5?
+A2: Install the GTK3 runtime libraries on your distro:
+    sudo apt install libgtk-3-0 liblzma5
+
+Q3: Can ChatXa run on Raspberry Pi or ARM64 Linux?
+A3: Yes! By running `flutter build linux --release` on an ARM64 Linux device 
+    (such as a Raspberry Pi 5 running Ubuntu 64-bit), Flutter will compile 
+    a native aarch64 binary.
+
+================================================================================
+Summary of Linux File Locations:
+Native Bundle:    /path/to/ChatXa/build/linux/x64/release/bundle/
+Android APK File: /path/to/ChatXa/app_store/ChatXa-Android-Release.apk
+================================================================================
