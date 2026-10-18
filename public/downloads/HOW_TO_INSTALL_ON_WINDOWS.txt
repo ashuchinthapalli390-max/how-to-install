@@ -41,11 +41,11 @@ ChatXa has built-in Flutter Windows desktop support configured in the repository
 
 HOW TO COMPILE & RUN THE NATIVE WINDOWS APP:
 1. Open PowerShell or Command Prompt in the ChatXa project folder:
-   cd "c:\Users\ashuc\OneDrive\Desktop\ChatXa"
+   cd ChatXa
 2. Run the release build command:
    flutter build windows --release
 3. Flutter will compile the C++ runner and generate the production files at:
-   c:\Users\ashuc\OneDrive\Desktop\ChatXa\build\windows\x64\runner\Release\
+   build\windows\x64\runner\Release\
 4. Inside that folder, you will find:
    - `chatxa.exe` (The main application executable)
    - `flutter_windows.dll` (Flutter engine)
@@ -68,8 +68,8 @@ STEP-BY-STEP:
    - BlueStacks 5: https://www.bluestacks.com
    - Or LDPlayer 9: https://www.ldplayer.net
 2. Install and launch the emulator.
-3. Open File Explorer on Windows and locate your APK:
-   c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
+3. Download ChatXa Android APK from the website:
+   https://how-to-install-tau.vercel.app/download
 4. Drag and drop the `ChatXa-Android-Release.apk` file directly into the emulator window!
    (Or click the "Install APK" button on the emulator's right-side toolbar).
 5. The emulator will install ChatXa in 15 seconds.
@@ -90,7 +90,7 @@ STEP-BY-STEP:
 4. Open PowerShell on Windows and connect ADB:
    adb connect 127.0.0.1:58526
 5. Install the ChatXa APK:
-   adb install "c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk"
+   adb install ChatXa-Android-Release.apk
 6. Once it says "Success", open your Windows Start Menu:
    ChatXa will appear right in your Start Menu as a native Windows application!
 
@@ -156,7 +156,6 @@ A3: Yes! The same backend database (`zewkgbycyxuotfwoicdr`) powers both platform
     Any message or friend request sent on your phone appears instantly on your PC.
 
 ================================================================================
-Summary of Windows File Locations:
-Release Folder: c:\Users\ashuc\OneDrive\Desktop\ChatXa\build\windows\x64\runner\Release\
-APK for Emulator: c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
+Official Website Download Portal:
+https://how-to-install-tau.vercel.app/download
 ================================================================================

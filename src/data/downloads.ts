@@ -82,7 +82,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     minOs: 'Android 8.0 (API 26) or higher',
     status: 'verified',
     downloadUrl: '/downloads/ChatXa-Android-Release.zip',
-    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\install\\public\\downloads\\ChatXa-Android-Release.zip',
+    directFilePath: 'Direct Website CDN · Fast Compressed Package',
     releaseNotes: [
       '★ RECOMMENDED FOR MOBILE: Optimized compressed package with 70% data savings (165 MB vs 550 MB).',
       'Guaranteed high-speed CDN download without network timeouts or bandwidth throttling.',
@@ -104,7 +104,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     minOs: 'Android 8.0 (API 26) or higher',
     status: 'verified',
     downloadUrl: '/downloads/ChatXa-Android-Release.apk',
-    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\app_store\\ChatXa-Android-Release.apk',
+    directFilePath: 'Direct Website CDN · Standalone Universal APK',
     releaseNotes: [
       'Direct uncompressed standalone APK ready for immediate one-tap installation.',
       'Contains complete uncompressed native symbols for WebRTC hardware acceleration.',
@@ -125,7 +125,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     minOs: 'iOS 13.0 or higher (iPhone & iPod touch)',
     status: 'verified',
     downloadUrl: '/downloads/ChatXa-iOS-Release.ipa',
-    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\app_store\\ChatXa-iOS-Release.ipa',
+    directFilePath: 'Direct Website CDN · Sideloadable IPA Package',
     releaseNotes: [
       'Bundle Identifier: com.chatxa.chatxa',
       'Optimized for sideloading via Sideloadly, InstallOnAir, Scarlet, or 3uTools.',
@@ -147,7 +147,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     minOs: 'Universal cross-platform archive',
     status: 'verified',
     downloadUrl: '/downloads/ChatXa-App-Store.zip',
-    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\App Store.zip',
+    directFilePath: 'Direct Website CDN · Master Multiplatform Bundle',
     releaseNotes: [
       'Master distribution bundle containing both verified release binaries and all technical guides.',
       'Includes ChatXa-Android-Release.apk (549.7 MB uncompressed) & ChatXa-iOS-Release.ipa (47.8 MB).',
@@ -168,7 +168,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '74c2e819b510ea937bc49e8a7192bc0148ad937210e7489abce91048bca81923',
     minOs: 'Windows 10 (version 1809+) or Windows 11',
     status: 'verified',
-    directFilePath: 'c:\\Users\\ashuc\\OneDrive\\Desktop\\ChatXa\\build\\windows\\x64\\runner\\Release\\',
+    directFilePath: 'Native Windows Desktop Architecture Target',
     sourceBuildCommand: 'flutter build windows --release',
     releaseNotes: [
       'Complete desktop release package containing chatxa.exe, flutter_windows.dll, and bundled data/ assets.',
@@ -189,7 +189,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: '319bc847201ea9827361abce09182374be8910471bca91048bce9102478ba192',
     minOs: 'macOS Monterey (12.0) or higher',
     status: 'verified',
-    directFilePath: 'build/macos/Build/Products/Release/ChatXa.app',
+    directFilePath: 'Apple Silicon & Intel Native Cocoa Target',
     sourceBuildCommand: 'flutter build macos --release',
     releaseNotes: [
       'Native Cocoa desktop application compiled with Apple Metal graphics acceleration.',
@@ -210,7 +210,7 @@ export const RELEASES_DATA: ReleaseArtifact[] = [
     sha256: 'f41289ae0918bca7291834710bc82910481bca91048bce9102478ba192398bc1',
     minOs: 'GLIBC 2.31+ (Ubuntu 20.04+, Debian 11+, Fedora 34+, Arch)',
     status: 'verified',
-    directFilePath: 'build/linux/x64/release/bundle/chatxa',
+    directFilePath: 'Linux GTK3 Terminal Build Target',
     sourceBuildCommand: 'flutter build linux --release',
     releaseNotes: [
       'GTK+ 3.0 desktop bundle with sub-second launch time and low system resource consumption.',

@@ -241,10 +241,10 @@ export const DownloadPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Local verified repository path */}
+                {/* Distribution delivery channel */}
                 {release.directFilePath && (
                   <div style={{ padding: '8px 12px', borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--raised)', fontSize: 11, fontFamily: 'var(--mono)', color: 'var(--muted)' }}>
-                    📂 Master Source: <span style={{ color: 'var(--text)' }}>{release.directFilePath}</span>
+                    📦 Delivery: <span style={{ color: 'var(--text)' }}>{release.directFilePath}</span>
                   </div>
                 )}
 

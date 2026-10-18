@@ -3,7 +3,8 @@
 ================================================================================
 Target App: ChatXa 4.0 (iOS Release Build)
 File Name:  ChatXa-iOS-Release.ipa
-File Path:  c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-iOS-Release.ipa
+Website:    https://how-to-install-tau.vercel.app/download
+Download:   /downloads/ChatXa-iOS-Release.ipa
 Size:       ~47.8 MB
 Compatible: iPhone (iOS 13.0, iOS 14, 15, 16, 17, 18 and newer)
 ================================================================================
@@ -200,9 +201,10 @@ YOU ARE ALL SET! You can now tap ChatXa on your iPhone home screen and use the a
 ================================================================================
 
 Q1: What about Android users?
-A1: Android is 100% plug-and-play. Android users can install:
-    "ChatXa-Android-Release.apk" (in c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\)
-    directly with 1 tap from WhatsApp, Telegram, or Google Drive.
+A1: Android is 100% plug-and-play. Android users can download:
+    "ChatXa-Android-Release.zip" or "ChatXa-Android-Release.apk"
+    directly from https://how-to-install-tau.vercel.app/download
+    or receive it directly from WhatsApp, Telegram, or Google Drive.
 
 Q2: "Unable to Install ChatXa — This app cannot be installed because its integrity could not be verified"?
 A2: This occurs when an over-the-air enterprise certificate expires. 
@@ -224,9 +226,6 @@ A5: Make sure Developer Mode is toggled ON in:
     iPhone Settings -> Privacy & Security -> Developer Mode.
 
 ================================================================================
-Summary of File Locations on Your Computer:
-================================================================================
-iOS App File:     c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-iOS-Release.ipa
-Android App File: c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
-Guide File:       c:\Users\ashuc\OneDrive\Desktop\HOW_TO_INSTALL_ON_IPHONE.txt
+Official Website Download Portal:
+https://how-to-install-tau.vercel.app/download
 ================================================================================

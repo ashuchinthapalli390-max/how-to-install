@@ -134,7 +134,6 @@ A2: Yes, native notifications will appear in the top-right corner of your Mac sc
     when you receive new chat messages or friend requests.
 
 ================================================================================
-Summary of Mac File Locations:
-iOS IPA for Apple Silicon: c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-iOS-Release.ipa
-Mac Platform Source:       c:\Users\ashuc\OneDrive\Desktop\ChatXa\macos\
+Official Website Download Portal:
+https://how-to-install-tau.vercel.app/download
 ================================================================================

@@ -2,9 +2,10 @@
           CHATXA 4.0 — COMPLETE ANDROID INSTALLATION MASTER GUIDE
 ================================================================================
 Target App: ChatXa 4.0 (Android Release Build)
-File Name:  ChatXa-Android-Release.apk
-File Path:  c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
-Size:       ~549.7 MB (Includes complete offline Flutter engine + WebRTC calling libraries)
+File Name:  ChatXa-Android-Release.apk (and ChatXa-Android-Release.zip)
+Website:    https://how-to-install-tau.vercel.app/download
+Download:   /downloads/ChatXa-Android-Release.zip (Fast 165 MB)
+Size:       ~165 MB (Compressed) / 549.7 MB (Uncompressed standalone APK)
 Compatible: Android 8.0 (Oreo), 9 (Pie), 10, 11, 12, 13, 14, 15 and newer
 Brands:     Samsung, Vivo, iQOO, Xiaomi, Redmi, POCO, OnePlus, Realme, Oppo,
             Motorola, Google Pixel, Nothing Phone, Techno, Infinix, etc.
@@ -63,9 +64,9 @@ STEP-BY-STEP:
    and change the option to "File Transfer" / "Transferring files (MTP)".
 3. On your Windows PC, open "File Explorer" (Windows Key + E) and go to "This PC".
 4. Open your phone's internal storage and open the "Download" folder.
-5. Copy "ChatXa-Android-Release.apk" from:
-   c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
-   and paste it into your phone's "Download" folder.
+5. Download "ChatXa-Android-Release.zip" or "ChatXa-Android-Release.apk" from:
+   https://how-to-install-tau.vercel.app/download
+   or copy the downloaded file directly into your phone's "Download" folder.
 6. Disconnect or leave connected.
 7. On your phone, open your built-in "Files" or "File Manager" app.
 8. Go to "Downloads" or "APKs" category.
@@ -91,7 +92,7 @@ STEP-BY-STEP:
    Check "Always allow from this computer" and tap "Allow".
 4. Open PowerShell or Command Prompt on your PC.
 5. Run this command:
-   adb install -r "c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk"
+   adb install -r ChatXa-Android-Release.apk
 6. The terminal will stream the APK and print "Success".
 7. ChatXa is instantly installed on your phone!
 
@@ -173,6 +174,6 @@ A3: Yes! When you first open ChatXa, make sure to tap "While using the app"
     when Android asks for Camera, Microphone, and Location permissions.
 
 ================================================================================
-Summary of Android File Location:
-c:\Users\ashuc\OneDrive\Desktop\ChatXa\app_store\ChatXa-Android-Release.apk
+Official Website Download Portal:
+https://how-to-install-tau.vercel.app/download
 ================================================================================
